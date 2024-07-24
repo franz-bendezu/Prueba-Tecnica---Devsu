@@ -92,13 +92,12 @@ describe('ProductService', () => {
       date_release: '2024-01-01T00:00:00.000Z',
       date_revision: '2024-01-01T00:00:00.000Z',
     };
-    const productId = '123';
 
     service.update(mockProduct).subscribe((response) => {
       expect(response).toBeTruthy();
     });
 
-    const req = httpTesting.expectOne(`/api/products/${productId}`);
+    const req = httpTesting.expectOne(`/api/products/${mockProduct.id}`);
     expect(req.request.method).toBe('PUT');
     expect(req.request.body).toEqual(mockProduct);
     req.flush({});
