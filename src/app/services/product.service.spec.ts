@@ -1,7 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-
 import { ProductService } from './product.service';
-import { HttpClient, provideHttpClient } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import {
   HttpTestingController,
   provideHttpClientTesting,
@@ -104,7 +103,7 @@ describe('ProductService', () => {
   });
 
   it('should delete a product by ID', () => {
-    const productId = '123';
+    const productId = 'toBeDeleted';
 
     service.deleteById(productId).subscribe((response) => {
       expect(response).toBeTruthy();
