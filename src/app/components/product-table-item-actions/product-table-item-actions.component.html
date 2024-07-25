@@ -1,1 +1,18 @@
-<p>product-table-item-actions works!</p>
+<button
+  class="more-button"
+  (click)="openMenu()"
+  #moreButton
+  title="Más opciones"
+>
+  <app-dots-icon class="more-icon" />
+</button>
+<div class="more-menu" [class]="{ show: showMenu }" #moreMenu>
+  <button class="more-menu-item" (click)="onDelete()">
+    <app-trash-icon class="more-menu-icon" />
+    Eliminar
+  </button>
+  <button (click)="onEdit()" class="more-menu-item">
+    <app-pencil-icon class="more-menu-icon" />
+    Ver
+  </button>
+</div>
