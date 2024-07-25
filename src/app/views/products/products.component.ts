@@ -3,11 +3,13 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { IProduct } from '../../interfaces/product.interface';
 import { ProductTableComponent } from '../../components/product-table/product-table.component';
+import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CommonModule, ProductTableComponent],
+  imports: [CommonModule, ProductTableComponent, FormsModule],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css',
 })
@@ -15,7 +17,10 @@ export class ProductsComponent implements OnInit {
   products: IProduct[] = [];
   loading = true;
   error: Error | null = null;
-  constructor(private productService: ProductService) {}
+
+  search = '';
+
+  constructor(private productService: ProductService, private router: Router) {}
 
   loadProducts() {
     this.loading = true;
@@ -35,5 +40,9 @@ export class ProductsComponent implements OnInit {
 
   async ngOnInit() {
     this.loadProducts();
+  }
+
+  addProduct() {
+    this.router.navigate(['products', 'new']);
   }
 }

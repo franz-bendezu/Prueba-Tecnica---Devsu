@@ -1,12 +1,26 @@
 <h1>Productos</h1>
-
+<!-- bar -->
+<div class="product-bar">
+  <input
+    class="search"
+    type="text"
+    [(ngModel)]="search"
+    placeholder="Nombre del producto"
+  />
+  <button
+    class="add-button"
+    (click)="addProduct()"
+  >
+    Agregar
+  </button>
+</div>
 <p *ngIf="error; else table">
   Error al cargar los productos
   <button (click)="loadProducts()">Reintentar</button>
 </p>
 
 <ng-template #table>
-    <app-product-table [products]="products">
-      <p *ngIf="loading" no-data>Cargando productos...</p>
-    </app-product-table>
+  <app-product-table class="product-table" [products]="products">
+    <p *ngIf="loading" no-data>Cargando productos...</p>
+  </app-product-table>
 </ng-template>
