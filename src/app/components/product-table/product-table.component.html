@@ -1,0 +1,20 @@
+<table>
+  <thead>
+    <tr>
+      <th>Logo</th>
+      <th>Nombre del producto</th>
+      <th>Descripción</th>
+      <th>Fecha de liberación</th>
+      <th>Fecha de reestructuración</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products">
+      <td><img [src]="product.logo" alt="Logo de {{ product.name }}" /></td>
+      <td>{{ product.name }}</td>
+      <td>{{ product.description }}</td>
+      <td>{{ product.date_release }}</td>
+      <td>{{ product.date_revision }}</td>
+    </tr>
+  </tbody>
+</table>
