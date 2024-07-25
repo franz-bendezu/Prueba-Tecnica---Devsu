@@ -7,12 +7,7 @@
     [(ngModel)]="search"
     placeholder="Nombre del producto"
   />
-  <button
-    class="add-button"
-    (click)="addProduct()"
-  >
-    Agregar
-  </button>
+  <button class="add-button" (click)="addProduct()">Agregar</button>
 </div>
 <p *ngIf="error; else table">
   Error al cargar los productos
@@ -20,7 +15,12 @@
 </p>
 
 <ng-template #table>
-  <app-product-table class="product-table" [products]="products">
+  <app-product-table
+    class="product-table"
+    [products]="products"
+    (delete)="deleteProduct($event)"
+    (edit)="editProduct($event)"
+  >
     <p *ngIf="loading" no-data>Cargando productos...</p>
   </app-product-table>
 </ng-template>
