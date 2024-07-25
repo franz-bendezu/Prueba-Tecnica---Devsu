@@ -1,0 +1,42 @@
+:host {
+  display: block;
+  padding: 2rem 1.5rem;
+  background-color: var(--white);
+  border-radius: 0.5rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.table-container {
+  background-color: var(--white);
+  overflow-x: auto;
+}
+
+.table-container .table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-container .table .table-header {
+  background-color: var(--brand-secondary);
+}
+
+.table-container .table .table-cell {
+  padding: 1rem 2rem;
+  font-weight: 700;
+}
+
+.table-cell.left {
+  text-align: left;
+}
+
+.table-cell.right {
+  text-align: right;
+}
+
+.table-cell.center {
+  text-align: center
+}
+
+.table-container .table .table-row {
+  border-bottom: 1px solid #f0f0f0;
+}

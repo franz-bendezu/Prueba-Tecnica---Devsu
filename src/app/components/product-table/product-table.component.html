@@ -1,29 +1,37 @@
-<table>
-  <thead>
-    <tr>
-      <th>Logo</th>
-      <th>Nombre del producto</th>
-      <th>Descripción</th>
-      <th>Fecha de liberación</th>
-      <th>Fecha de reestructuración</th>
-    </tr>
-  </thead>
-  <tbody>
-    <ng-container *ngIf="products.length">
-      <tr *ngFor="let product of products">
-        <td>
-          <img [src]="product.logo" alt="Logo de {{ product.name }}" />
-        </td>
-        <td>{{ product.name }}</td>
-        <td>{{ product.description }}</td>
-        <td>{{ product.date_release | date : "dd/MM/yyyy" }}</td>
-        <td>{{ product.date_revision | date : "dd/MM/yyyy" }}</td>
+<div class="table-container">
+  <table class="table">
+    <thead class="table-header">
+      <tr>
+        <th class="table-cell center">Logo</th>
+        <th class="table-cell left">Nombre del producto</th>
+        <th class="table-cell left">Descripción</th>
+        <th class="table-cell left">Fecha de liberación</th>
+        <th class="table-cell left">Fecha de reestructuración</th>
       </tr>
-    </ng-container>
-    <tr *ngIf="!products.length">
-      <td colspan="5">
-        <ng-content select="[no-data]"> No hay productos </ng-content>
-      </td>
-    </tr>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <ng-container *ngIf="products.length">
+        <tr *ngFor="let product of products" class="table-row">
+          <td class="table-cell center">
+            <img [src]="product.logo" alt="Logo de {{ product.name }}" />
+          </td>
+          <td class="table-cell left">{{ product.name }}</td>
+          <td class="table-cell left">
+            {{ product.description }}
+          </td>
+          <td class="table-cell left">
+            {{ product.date_release | date : "dd/MM/yyyy" }}
+          </td>
+          <td class="table-cell left">
+            {{ product.date_revision | date : "dd/MM/yyyy" }}
+          </td>
+        </tr>
+      </ng-container>
+      <tr *ngIf="!products.length" class="table-row">
+        <td colspan="5">
+          <ng-content select="[no-data]"> No hay productos </ng-content>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
