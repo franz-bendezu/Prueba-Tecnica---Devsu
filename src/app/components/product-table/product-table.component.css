@@ -16,11 +16,11 @@
   border-collapse: collapse;
 }
 
-.table-container .table .table-header {
+.table .table-header {
   background-color: var(--brand-secondary);
 }
 
-.table-container .table .table-cell {
+.table .table-cell {
   padding: 1rem 2rem;
   font-weight: 700;
 }
@@ -34,9 +34,9 @@
 }
 
 .table-cell.center {
-  text-align: center
+  text-align: center;
 }
 
-.table-container .table .table-row {
+.table .table-row {
   border-bottom: 1px solid #f0f0f0;
 }
