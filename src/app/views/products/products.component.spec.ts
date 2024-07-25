@@ -7,6 +7,7 @@ import { of, throwError } from 'rxjs';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideZoneChangeDetection } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
 describe('ProductsComponent', () => {
   let component: ProductsComponent;
@@ -72,5 +73,34 @@ describe('ProductsComponent', () => {
     expect(component.products).toEqual([]);
     expect(component.loading).toBe(false);
     expect(component.error).toBe(error);
+  });
+
+  it('should show table products', () => {
+    const products: IProduct[] = [
+      {
+        id: '1',
+        name: 'Product 1',
+        description: 'Description 1',
+        logo: '',
+        date_release: '',
+        date_revision: '',
+      },
+      {
+        id: '2',
+        name: 'Product 2',
+        description: 'Description 2',
+        logo: '',
+        date_release: '',
+        date_revision: '',
+      },
+    ];
+    spyOn(productService, 'getAll').and.returnValue(of({ data: products }));
+
+    fixture.detectChanges();
+
+    // Check if the table component is rendered and the products are passed to it
+    const productTable = fixture.debugElement.query(By.css('app-product-table'));
+    expect(productTable).toBeTruthy();
+    expect(productTable.componentInstance.products).toEqual(component.products);
   });
 });
