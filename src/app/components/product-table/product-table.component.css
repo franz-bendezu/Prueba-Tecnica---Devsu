@@ -55,5 +55,22 @@
   background-color: white;
   border: 1px solid #f0f0f0;
   border-radius: 0.5rem;
-  padding: 1rem 2rem;
+  padding: 0.5rem 1rem;
+}
+
+.table-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0rem;
+  gap: 1rem;
+}
+
+.table-navigation .prev-button,
+.table-navigation .next-button {
+  background-color: var(--brand-secondary);
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--brand-secondary);
 }
