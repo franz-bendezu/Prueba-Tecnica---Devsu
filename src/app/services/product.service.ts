@@ -29,4 +29,8 @@ export class ProductService {
   deleteById(id: string) {
     return this.http.delete(`${this.url}/${id}`);
   }
+
+  verificationById(id: string) {
+    return this.http.get<boolean>(`${this.url}/verification/${id}`);
+  }
 }

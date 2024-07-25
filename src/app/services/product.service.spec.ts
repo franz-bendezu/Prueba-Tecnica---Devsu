@@ -114,4 +114,16 @@ describe('ProductService', () => {
     expect(req.request.body).toBeNull();
     req.flush({});
   });
+
+  it('should verify if a product exists by ID', () => {
+    const productId = 'exists';
+
+    service.verificationById(productId).subscribe((response) => {
+      expect(response).toBeTrue();
+    });
+
+    const req = httpTesting.expectOne(`/api/products/verification/${productId}`);
+    expect(req.request.method).toBe('GET');
+    req.flush(true);
+  });
 });
