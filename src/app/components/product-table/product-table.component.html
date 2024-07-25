@@ -11,7 +11,7 @@
     </thead>
     <tbody>
       <ng-container *ngIf="products.length">
-        <tr *ngFor="let product of products" class="table-row">
+        <tr *ngFor="let product of items" class="table-row">
           <td class="table-cell center">
             <img [src]="product.logo" alt="Logo de {{ product.name }}" />
           </td>
@@ -40,8 +40,29 @@
   <div>{{ products.length }} Resultados</div>
 
   <div class="table-pagination">
-    <select class="select-page"
-     [(ngModel)]="pageSize" type="number">
+    <button
+      class="button"
+      [disabled]="currentPage === 1"
+      (click)="changePage(currentPage - 1)"
+    >
+      Anterior
+    </button>
+    <button
+      class="button"
+      [disabled]="currentPage === totalPages"
+      (click)="changePage(currentPage + 1)"
+    >
+      Siguiente
+    </button>
+  </div>
+
+  <div class="table-pagination">
+    <select
+      class="select-page"
+      [ngModel]="pageSize"
+      type="number"
+      (ngModelChange)="changePageSize($event)"
+    >
       <option *ngFor="let size of pageSizes" [value]="size">
         {{ size }}
       </option>
