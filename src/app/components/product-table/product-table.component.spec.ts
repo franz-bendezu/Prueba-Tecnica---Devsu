@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProductTableComponent } from './product-table.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 
 describe('ProductTableComponent', () => {
   let component: ProductTableComponent;
@@ -64,4 +65,76 @@ describe('ProductTableComponent', () => {
     expect(component.items[0]).toEqual(component.products[1]);
   });
 
+  it('should disable the "Previous" button on the first page', () => {
+    component.currentPage = 1;
+    fixture.detectChanges();
+    const btn = fixture.debugElement.query(
+      By.css('.table-navigation .prev-button')
+    ).nativeElement;
+    expect(btn.disabled).toBeTruthy();
+  });
+
+  it('should disable the "Next" button on the last page', () => {
+    component.currentPage = component.totalPages;
+    fixture.detectChanges();
+    const btn = fixture.debugElement.query(
+      By.css('.table-navigation .next-button')
+    ).nativeElement;
+
+    expect(btn.disabled).toBeTruthy();
+  });
+
+  it('should display the correct total number of results', () => {
+    const totalResultsElement = fixture.debugElement.query(
+      By.css('.table-bottom > div')
+    ).nativeElement;
+    expect(totalResultsElement.textContent).toContain(
+      `${component.products.length} Resultados`
+    );
+  });
+
+  it('should enable or disable buttons correctly based on currentPage', () => {
+    component.currentPage = 1;
+    component.totalPages = 2;
+    fixture.detectChanges();
+
+    const buttons = fixture.debugElement.queryAll(
+      By.css('.table-navigation button')
+    );
+    expect(buttons[0].nativeElement.disabled).toBeTrue();
+    expect(buttons[1].nativeElement.disabled).toBeFalse();
+
+    component.currentPage = 2;
+    fixture.detectChanges();
+
+    expect(buttons[0].nativeElement.disabled).toBeFalse();
+    expect(buttons[1].nativeElement.disabled).toBeTrue();
+  });
+
+  it('should call changePage with correct argument when Previous button is clicked', () => {
+    spyOn(component, 'changePage');
+    component.currentPage = 2;
+    fixture.detectChanges();
+
+    const prevButton = fixture.debugElement.query(
+      By.css('.table-navigation .prev-button')
+    ).nativeElement;
+    prevButton.click();
+
+    expect(component.changePage).toHaveBeenCalledWith(1);
+  });
+
+  it('should call changePage with correct argument when Next button is clicked', () => {
+    spyOn(component, 'changePage');
+    component.currentPage = 1;
+    component.totalPages = 2;
+    fixture.detectChanges();
+
+    const nextButton = fixture.debugElement.query(
+      By.css('.table-navigation .next-button')
+    ).nativeElement;
+    nextButton.click();
+
+    expect(component.changePage).toHaveBeenCalledWith(2);
+  });
 });

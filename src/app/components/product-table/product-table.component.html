@@ -39,16 +39,16 @@
 <div class="table-bottom">
   <div>{{ products.length }} Resultados</div>
 
-  <div class="table-pagination">
+  <div class="table-navigation">
     <button
-      class="button"
+      class="prev-button"
       [disabled]="currentPage === 1"
       (click)="changePage(currentPage - 1)"
     >
       Anterior
     </button>
     <button
-      class="button"
+      class="next-button"
       [disabled]="currentPage === totalPages"
       (click)="changePage(currentPage + 1)"
     >
