@@ -137,4 +137,23 @@ describe('ProductTableComponent', () => {
 
     expect(component.changePage).toHaveBeenCalledWith(2);
   });
+
+  it('should emit edit event with correct product data', () => {
+    const productToEdit = component.products[0];
+    spyOn(component.edit, 'emit');
+  
+    component.onEdit(productToEdit);
+  
+    expect(component.edit.emit).toHaveBeenCalledWith(productToEdit);
+  });
+  
+  it('should emit delete event with correct product data', () => {
+    const productToDelete = component.products[1];
+    spyOn(component.delete, 'emit');
+  
+    component.onDelete(productToDelete);
+  
+    expect(component.delete.emit).toHaveBeenCalledWith(productToDelete);
+  });
+  
 });
