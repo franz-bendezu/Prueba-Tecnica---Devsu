@@ -62,7 +62,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 0rem;
   gap: 1rem;
 }
 
@@ -74,3 +73,4 @@
   border-radius: 0.5rem;
   border: 1px solid var(--brand-secondary);
 }
+
