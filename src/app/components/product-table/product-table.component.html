@@ -7,6 +7,7 @@
         <th class="table-cell left">Descripción</th>
         <th class="table-cell left">Fecha de liberación</th>
         <th class="table-cell left">Fecha de reestructuración</th>
+        <th class="table-cell center"></th>
       </tr>
     </thead>
     <tbody>
@@ -24,6 +25,12 @@
           </td>
           <td class="table-cell left">
             {{ product.date_revision | date : "dd/MM/yyyy" }}
+          </td>
+          <td class="table-cell center">
+            <app-product-table-item-actions
+              (delete)="onDelete(product)"
+              (edit)="onEdit(product)"
+            ></app-product-table-item-actions>
           </td>
         </tr>
       </ng-container>
