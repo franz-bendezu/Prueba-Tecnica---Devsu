@@ -1,12 +1,20 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { IProduct } from '../../interfaces/product.interface';
 import { FormsModule } from '@angular/forms';
+import { ProductTableItemActionsComponent } from '../product-table-item-actions/product-table-item-actions.component';
 
 @Component({
   selector: 'app-product-table',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ProductTableItemActionsComponent],
   templateUrl: './product-table.component.html',
   styleUrl: './product-table.component.css',
 })
@@ -19,6 +27,10 @@ export class ProductTableComponent implements OnChanges {
   pageSize = 10;
   @Input()
   currentPage = 1;
+  @Output()
+  edit = new EventEmitter<IProduct>();
+  @Output()
+  delete = new EventEmitter<IProduct>();
 
   items: IProduct[] = [];
   totalPages = 0;
@@ -52,5 +64,13 @@ export class ProductTableComponent implements OnChanges {
     const startIndex = (this.currentPage - 1) * this.pageSize;
     const endIndex = startIndex + this.pageSize;
     this.items = this.products.slice(startIndex, endIndex);
+  }
+
+  onEdit(product: IProduct): void {
+    this.edit.emit(product);
+  }
+
+  onDelete(product: IProduct): void {
+    this.delete.emit(product);
   }
 }
