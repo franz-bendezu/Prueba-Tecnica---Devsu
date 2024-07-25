@@ -36,14 +36,39 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
   box-sizing: inherit;
   position: relative;
 }
 
 .content {
-  display: flex;
+  display: block;
+  position: relative;
   width: 100%;
-  max-width: 700px;
-  margin-bottom: 3rem;
+  margin: 0 auto;
+  padding: 1rem;
+  overflow: hidden  ;
+}
+
+@media (max-width: 767px) {
+  .content {
+    width: 100vw
+  }
+}
+
+@media (min-width: 768px) {
+  .content {
+    width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .content {
+    width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .content {
+    width: 1280px;
+  }
 }
