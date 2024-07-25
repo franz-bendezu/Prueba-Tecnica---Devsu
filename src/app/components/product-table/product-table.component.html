@@ -35,3 +35,16 @@
     </tbody>
   </table>
 </div>
+
+<div class="table-bottom">
+  <div>{{ products.length }} Resultados</div>
+
+  <div class="table-pagination">
+    <select class="select-page"
+     [(ngModel)]="pageSize" type="number">
+      <option *ngFor="let size of pageSizes" [value]="size">
+        {{ size }}
+      </option>
+    </select>
+  </div>
+</div>
