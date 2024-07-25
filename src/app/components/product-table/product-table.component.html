@@ -9,12 +9,21 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let product of products">
-      <td><img [src]="product.logo" alt="Logo de {{ product.name }}" /></td>
-      <td>{{ product.name }}</td>
-      <td>{{ product.description }}</td>
-      <td>{{ product.date_release }}</td>
-      <td>{{ product.date_revision }}</td>
+    <ng-container *ngIf="products.length">
+      <tr *ngFor="let product of products">
+        <td>
+          <img [src]="product.logo" alt="Logo de {{ product.name }}" />
+        </td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.description }}</td>
+        <td>{{ product.date_release }}</td>
+        <td>{{ product.date_revision }}</td>
+      </tr>
+    </ng-container>
+    <tr *ngIf="!products.length">
+      <td colspan="5">
+        <ng-content select="[no-data]"> No hay productos </ng-content>
+      </td>
     </tr>
   </tbody>
 </table>

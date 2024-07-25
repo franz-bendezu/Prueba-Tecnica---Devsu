@@ -6,8 +6,7 @@
 </p>
 
 <ng-template #table>
-  <p *ngIf="loading; else table">Cargando productos...</p>
-  <ng-template #table>
-    <app-product-table [products]="products"></app-product-table>
-  </ng-template>
+    <app-product-table [products]="products">
+      <p *ngIf="loading" no-data>Cargando productos...</p>
+    </app-product-table>
 </ng-template>
