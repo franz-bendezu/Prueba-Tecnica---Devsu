@@ -1,14 +1,14 @@
+import { Validators } from '@angular/forms';
 import {
-  AbstractControl,
-  ValidatorFn,
-  ValidationErrors,
-  Validators,
-} from '@angular/forms';
-import { CustomValidationErrors, CustomValidatorFn } from './custom-validator.interface';
+  CustomAsyncValidatorFn,
+  CustomValidationErrors,
+  CustomValidatorFn,
+} from './custom-validator.interface';
+import { Observable, map, catchError, of } from 'rxjs';
 
 export function required(message?: string): CustomValidatorFn {
   const originalValidator = Validators.required;
-  return (control: AbstractControl): CustomValidationErrors | null => {
+  return (control): CustomValidationErrors | null => {
     const validationResult = originalValidator(control);
     if (validationResult && validationResult['required']) {
       return {
@@ -21,9 +21,12 @@ export function required(message?: string): CustomValidatorFn {
   };
 }
 
-export function minLength(minLength: number, message?: string): CustomValidatorFn {
+export function minLength(
+  minLength: number,
+  message?: string
+): CustomValidatorFn {
   const originalValidator = Validators.minLength(minLength);
-  return (control: AbstractControl): CustomValidationErrors | null => {
+  return (control): CustomValidationErrors | null => {
     const validationResult = originalValidator(control);
     if (validationResult && validationResult['minlength']) {
       return {
@@ -38,9 +41,12 @@ export function minLength(minLength: number, message?: string): CustomValidatorF
   };
 }
 
-export function maxLength(maxLength: number, message?: string): ValidatorFn {
+export function maxLength(
+  maxLength: number,
+  message?: string
+): CustomValidatorFn {
   const originalValidator = Validators.maxLength(maxLength);
-  return (control: AbstractControl): CustomValidationErrors | null => {
+  return (control) => {
     const validationResult = originalValidator(control);
     if (validationResult && validationResult['maxlength']) {
       return {
@@ -52,5 +58,29 @@ export function maxLength(maxLength: number, message?: string): ValidatorFn {
       };
     }
     return null;
+  };
+}
+
+
+export type CodeValidator = (code: string) => Observable<boolean>;
+
+export function codeExists(
+  verification: CodeValidator,
+  notExistsMessage: string,
+  errorMessage: string
+): CustomAsyncValidatorFn {
+  return (control) => {
+    return verification(control.value).pipe(
+      map((exists) =>
+        !exists
+          ? null
+          : {
+              codeNotExists: {
+                message: notExistsMessage,
+              },
+            }
+      ),
+      catchError(() => of({ codeNotExists: { message: errorMessage } }))
+    );
   };
 }
