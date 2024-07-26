@@ -9,10 +9,13 @@ import {
 } from '../interfaces/products.interface';
 import { IProductService } from './product.service.interface';
 import { PRODUCT_SERVICE_TOKEN } from './product.service.token';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class ProductService implements IProductService {
-  url = '/api/products';
+  static PATH = '/products';
+  url = environment.apiUrl + ProductService.PATH;
+
   constructor(private http: HttpClient) {}
 
   getAll() {

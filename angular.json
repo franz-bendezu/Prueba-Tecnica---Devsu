@@ -46,7 +46,24 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
+            },
+            "development-proxy": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development-proxy.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -59,6 +76,9 @@
             },
             "development": {
               "buildTarget": "technical-test-devsu:build:development"
+            },
+            "development-proxy": {
+              "buildTarget": "technical-test-devsu:build:development-proxy"
             }
           },
           "defaultConfiguration": "development"
