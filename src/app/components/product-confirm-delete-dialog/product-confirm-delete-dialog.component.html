@@ -10,12 +10,15 @@
       (click)="handleReject()"
       class="reject-button"
       variant="secondary"
+      [disabled]="loading"
       >Cancelar</app-button
     >
     <app-button
       class="confirm-button"
       (click)="handleConfirm()"
       variant="primary"
+      [disabled]="loading"
+      [loading]="loading"
       >Confirmar</app-button
     >
   </ng-container>
