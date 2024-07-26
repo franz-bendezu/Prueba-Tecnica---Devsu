@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { IProduct } from '../../interfaces/product.interface';
 import { DialogComponent } from '../../../shared/components/dialog/dialog.component';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
@@ -9,6 +15,7 @@ import { ButtonComponent } from '../../../shared/components/button/button.compon
   imports: [DialogComponent, ButtonComponent],
   templateUrl: './product-confirm-delete-dialog.component.html',
   styleUrl: './product-confirm-delete-dialog.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductConfirmDeleteDialogComponent {
   @Input()
