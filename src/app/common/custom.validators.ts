@@ -61,6 +61,19 @@ export function maxLength(
   };
 }
 
+export function minDate(minDate: Date, message?: string): CustomValidatorFn {
+  return (control) => {
+    const date = new Date(control.value);
+    if (date < minDate) {
+      return {
+        minDate: {
+          message: message || `La fecha mínima es ${minDate}`,
+        },
+      };
+    }
+    return null;
+  };
+}
 
 export type CodeValidator = (code: string) => Observable<boolean>;
 
