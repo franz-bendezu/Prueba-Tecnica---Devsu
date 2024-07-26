@@ -1,4 +1,6 @@
 import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -16,6 +18,7 @@ import { TrashIcon } from '../../../shared/components/icons/trash.icon';
   imports: [DotsIcon, TrashIcon, PencilIcon],
   templateUrl: './product-table-item-actions.component.html',
   styleUrl: './product-table-item-actions.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductTableItemActionsComponent {
   @Output() edit = new EventEmitter();
@@ -38,13 +41,16 @@ export class ProductTableItemActionsComponent {
   @ViewChild('moreButton') toggleButton?: ElementRef;
   @ViewChild('moreMenu') menu?: ElementRef;
 
-  constructor(private renderer: Renderer2) {
+  constructor(private renderer: Renderer2, private cdr: ChangeDetectorRef) {}
+
+  ngAfterViewInit() {
     this.renderer.listen('window', 'click', (e: Event) => {
       if (
         e.target !== this.toggleButton?.nativeElement &&
         e.target !== this.menu?.nativeElement
       ) {
         this.showMenu = false;
+        this.cdr.markForCheck();
       }
     });
   }
