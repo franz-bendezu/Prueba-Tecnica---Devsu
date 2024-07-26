@@ -23,12 +23,12 @@ export class FormErrorDisplayComponent {
   constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
-    this.control.statusChanges.subscribe(() => {
-      this.cdr.markForCheck(); // Trigger change detection manually
+    this.control.events.subscribe(() => {
+      this.cdr.markForCheck(); 
     });
   }
 
-  get errorKeys(): string[] {
+  getErrorKeys(): string[] {
     return Object.keys(this.control.errors || {});
   }
 }

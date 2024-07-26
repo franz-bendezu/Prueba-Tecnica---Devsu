@@ -32,7 +32,7 @@ describe('FormErrorDisplayComponent', () => {
     component.control = new FormControl('');
     setError(component.control, null);
     fixture.detectChanges();
-    expect(component.errorKeys).toEqual([]);
+    expect(component.getErrorKeys()).toEqual([]);
   });
 
   it('should display error message when control is dirty or touched and has errors', () => {
