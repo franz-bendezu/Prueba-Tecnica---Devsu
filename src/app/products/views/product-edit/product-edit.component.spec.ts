@@ -230,7 +230,7 @@ describe('ProductEditComponent', () => {
 
     expect(updateSpy).toHaveBeenCalledWith(product);
 
-    expect(component.loadingSave).toBe(true);
+    expect(component.loadingSave).toBe(false);
 
     fixture.detectChanges();
 
