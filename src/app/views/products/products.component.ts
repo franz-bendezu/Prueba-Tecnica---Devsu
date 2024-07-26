@@ -7,6 +7,9 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ProductConfirmDeleteDialogComponent } from '../../components/product-confirm-delete-dialog/product-confirm-delete-dialog.component';
 import { ButtonComponent } from '../../components/button/button.component';
+import { PARAM_NEW, PRODUCTS_PATH } from '../../constants/routes.contants';
+import { IProductsReponse } from '../../interfaces/products.interface';
+
 @Component({
   selector: 'app-products',
   standalone: true,
@@ -24,27 +27,28 @@ export class ProductsComponent implements OnInit {
   products: IProduct[] = [];
   loading = true;
   error: Error | null = null;
+  saveError: Error | null = null;
 
   search = '';
 
   openDialog = false;
 
   productToDelete: IProduct | null = null;
+  loadingDelete = false;
 
   constructor(private productService: ProductService, private router: Router) {}
 
   loadProducts() {
     this.loading = true;
+    this.error = null;
     this.productService.getAll().subscribe({
-      complete: () => {
+      next: (response: IProductsReponse) => {
+        this.products = response.data;
         this.loading = false;
       },
       error: (err) => {
         this.error = err;
         this.loading = false;
-      },
-      next: (products) => {
-        this.products = products.data;
       },
     });
   }
@@ -54,11 +58,11 @@ export class ProductsComponent implements OnInit {
   }
 
   addProduct() {
-    this.router.navigate(['products', 'new']);
+    this.router.navigate([PRODUCTS_PATH, PARAM_NEW]);
   }
 
   editProduct(product: IProduct) {
-    this.router.navigate(['products', product.id]);
+    this.router.navigate([PRODUCTS_PATH, product.id]);
   }
 
   deleteProduct(product: IProduct) {
@@ -67,13 +71,16 @@ export class ProductsComponent implements OnInit {
   }
 
   confirmDelete(product: IProduct) {
-    this.openDialog = false;
+    this.loadingDelete = true;
+    this.saveError = null;
     this.productService.deleteById(product.id).subscribe({
-      complete: () => {
+      next: () => {
         this.loadProducts();
+        this.openDialog = false;
       },
       error: (err) => {
-        this.error = err;
+        this.saveError = err;
+        this.loadingDelete = false;
       },
     });
   }
