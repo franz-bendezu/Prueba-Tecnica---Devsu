@@ -1,4 +1,6 @@
 import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -15,6 +17,7 @@ import {
   imports: [],
   templateUrl: './dialog.component.html',
   styleUrl: './dialog.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DialogComponent implements OnChanges {
   @Input()
@@ -23,9 +26,11 @@ export class DialogComponent implements OnChanges {
   openChange = new EventEmitter<boolean>();
 
   @ViewChild('dialog', { static: true })
-   dialog!: ElementRef<HTMLDialogElement>;
+  dialog!: ElementRef<HTMLDialogElement>;
 
   private lastOpenState: boolean | null = null;
+
+  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (
@@ -34,6 +39,7 @@ export class DialogComponent implements OnChanges {
     ) {
       this.toggleDialog(changes['open'].currentValue);
       this.lastOpenState = changes['open'].currentValue;
+      this.cdr.markForCheck();
     }
   }
 
@@ -56,5 +62,6 @@ export class DialogComponent implements OnChanges {
   handleClose() {
     this.open = false;
     this.openChange.emit(false);
+    this.cdr.markForCheck();
   }
 }
