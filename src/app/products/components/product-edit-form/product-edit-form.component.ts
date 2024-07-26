@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
@@ -52,6 +53,8 @@ export class ProductEditFormComponent implements OnChanges, OnInit {
   loading = false;
   @Input()
   loadingSave = false;
+  @Input()
+  disabled = false;
 
   @Input({
     required: true,
@@ -139,6 +142,13 @@ export class ProductEditFormComponent implements OnChanges, OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (changes['disabled']) {
+      if (this.disabled) {
+        this.productForm.disable();
+      } else {
+        this.productForm.enable();
+      }
+    }
     if (changes['product']) {
       this.updateForm();
     }
