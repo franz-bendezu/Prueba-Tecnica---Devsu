@@ -4,7 +4,23 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Steps for Local Running
 
-To run the project in local mode with a proxy local backend server, execute the following command in the terminal:
+To run the project locally, ensure that the backend server is running on port 3002. If the backend is running on a different port or URL, update the `proxy.conf.json` file accordingly by changing the `target` value to the new URL.
+
+Example `proxy.conf.json`:
+
+```json
+{
+  "/api": {
+    "target": "http://your-backend-url",
+    "secure": false,
+    "pathRewrite": {
+      "^/api": ""
+    }
+  }
+}
+```
+
+After updating the proxy configuration, run the project in local mode with a proxy to the local backend server by executing the following command in the terminal:
 
 ```bash
 npm run start:local
