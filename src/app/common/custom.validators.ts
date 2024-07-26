@@ -4,10 +4,11 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
+import { CustomValidationErrors, CustomValidatorFn } from './custom-validator.interface';
 
-export function required(message?: string): ValidatorFn {
+export function required(message?: string): CustomValidatorFn {
   const originalValidator = Validators.required;
-  return (control: AbstractControl): ValidationErrors | null => {
+  return (control: AbstractControl): CustomValidationErrors | null => {
     const validationResult = originalValidator(control);
     if (validationResult && validationResult['required']) {
       return {
@@ -20,9 +21,9 @@ export function required(message?: string): ValidatorFn {
   };
 }
 
-export function minLength(minLength: number, message?: string): ValidatorFn {
+export function minLength(minLength: number, message?: string): CustomValidatorFn {
   const originalValidator = Validators.minLength(minLength);
-  return (control: AbstractControl): ValidationErrors | null => {
+  return (control: AbstractControl): CustomValidationErrors | null => {
     const validationResult = originalValidator(control);
     if (validationResult && validationResult['minlength']) {
       return {
@@ -39,7 +40,7 @@ export function minLength(minLength: number, message?: string): ValidatorFn {
 
 export function maxLength(maxLength: number, message?: string): ValidatorFn {
   const originalValidator = Validators.maxLength(maxLength);
-  return (control: AbstractControl): ValidationErrors | null => {
+  return (control: AbstractControl): CustomValidationErrors | null => {
     const validationResult = originalValidator(control);
     if (validationResult && validationResult['maxlength']) {
       return {
