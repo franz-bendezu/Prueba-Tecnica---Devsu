@@ -6,6 +6,7 @@ import { ProductTableComponent } from '../../components/product-table/product-ta
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ProductConfirmDeleteDialogComponent } from '../../components/product-confirm-delete-dialog/product-confirm-delete-dialog.component';
+import { ButtonComponent } from '../../components/button/button.component';
 @Component({
   selector: 'app-products',
   standalone: true,
@@ -14,6 +15,7 @@ import { ProductConfirmDeleteDialogComponent } from '../../components/product-co
     ProductTableComponent,
     FormsModule,
     ProductConfirmDeleteDialogComponent,
+    ButtonComponent,
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css',
