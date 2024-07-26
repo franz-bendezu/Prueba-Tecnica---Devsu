@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IProduct } from '../../interfaces/product.interface';
 import { IProductService } from '../../services/product.service.interface';
@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { ProductEditFormComponent } from '../../components/product-edit-form/product-edit-form.component';
 import { catchError, finalize } from 'rxjs';
 import { PARAM_NEW, PRODUCTS_PATH } from '../../constants/routes.contants';
+import { CodeValidator } from '../../common/custom.validators';
 
 @Component({
   selector: 'app-product-edit',
@@ -22,6 +23,7 @@ export class ProductEditComponent implements OnInit {
   errorSave = '';
   loadingSave = false;
   loading = false;
+  codeValidator: CodeValidator;
 
   constructor(
     @Inject(PRODUCT_SERVICE_TOKEN) private productService: IProductService,
@@ -29,6 +31,7 @@ export class ProductEditComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.title = 'Formulario de Registro';
+    this.codeValidator = (code: string)=> this.productService.verificationById(code);
   }
 
   ngOnInit(): void {
