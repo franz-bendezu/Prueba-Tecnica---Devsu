@@ -22,7 +22,7 @@ export class ProductTableComponent implements OnChanges {
   @Input()
   products: IProduct[] = [];
   @Input()
-  pageSizes = [5, 10, 25, 50, 100];
+  pageSizes = [5, 10, 20];
   @Input()
   pageSize = 10;
   @Input()
