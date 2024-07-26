@@ -61,10 +61,14 @@ export function maxLength(
   };
 }
 
-export function minDate(minDate: string, message?: string): CustomValidatorFn {
+export function minDate(minDate: Date, message?: string): CustomValidatorFn {
+  const formatedMinDate = `${minDate.getFullYear()}-${
+    minDate.getMonth() + 1 < 10 ? `0${minDate.getMonth() + 1}` : minDate.getMonth() + 1
+  }-${minDate.getDate()}`;
+
   return (control) => {
     const date = control.value;
-    if (date < minDate) {
+    if (date < formatedMinDate) {
       return {
         minDate: {
           message: message || `La fecha mínima es ${minDate}`,
