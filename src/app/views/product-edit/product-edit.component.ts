@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IProduct } from '../../interfaces/product.interface';
-import { ProductService } from '../../services/product.service';
+import { IProductService } from '../../services/product.service.interface';
+import { PRODUCT_SERVICE_TOKEN } from '../../services/product.service.token';
 import { CommonModule } from '@angular/common';
 import { ProductEditFormComponent } from '../../components/product-edit-form/product-edit-form.component';
 import { catchError, finalize } from 'rxjs';
@@ -23,7 +24,7 @@ export class ProductEditComponent implements OnInit {
   loading = false;
 
   constructor(
-    private productService: ProductService,
+    @Inject(PRODUCT_SERVICE_TOKEN) private productService: IProductService,
     private router: Router,
     private route: ActivatedRoute
   ) {

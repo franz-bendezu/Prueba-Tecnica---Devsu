@@ -6,7 +6,7 @@ import {
   tick,
 } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
-import { ProductService } from '../../services/product.service';
+import { provideProductService } from '../../services/product.service';
 import { IProduct } from '../../interfaces/product.interface';
 import { ProductsComponent } from './products.component';
 import { of, throwError } from 'rxjs';
@@ -15,11 +15,13 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { By } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { PARAM_NEW, PRODUCTS_PATH } from '../../constants/routes.contants';
+import { IProductService } from '../../services/product.service.interface';
+import { PRODUCT_SERVICE_TOKEN } from '../../services/product.service.token';
 
 describe('ProductsComponent', () => {
   let component: ProductsComponent;
   let fixture: ComponentFixture<ProductsComponent>;
-  let productService: ProductService;
+  let productService: IProductService;
   const routerSpy = jasmine.createSpyObj<Router>('Router', ['navigate']);
 
   beforeEach(async () => {
@@ -28,14 +30,14 @@ describe('ProductsComponent', () => {
       providers: [
         provideHttpClient(),
         provideHttpClientTesting(),
-        ProductService,
+        provideProductService(),
         { provide: Router, useValue: routerSpy },
       ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ProductsComponent);
     component = fixture.componentInstance;
-    productService = TestBed.inject(ProductService);
+    productService = TestBed.inject(PRODUCT_SERVICE_TOKEN);
   });
 
   it('should create', () => {
@@ -188,7 +190,7 @@ describe('ProductsComponent', () => {
     );
 
     fixture.detectChanges();
-    
+
     component.confirmDelete(productMock);
 
     expect(component.saveError).toBe(mockError);

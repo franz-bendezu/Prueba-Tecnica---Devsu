@@ -1,21 +1,26 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IProduct } from '../interfaces/product.interface';
-import { IProductsReponse } from '../interfaces/products.interface';
+import {
+  IProductCreateResponse,
+  IProductDeleteResponse,
+  IProductsResponse,
+  IProductUpdateResponse,
+} from '../interfaces/products.interface';
+import { IProductService } from './product.service.interface';
+import { PRODUCT_SERVICE_TOKEN } from './product.service.token';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class ProductService {
+@Injectable()
+export class ProductService implements IProductService {
   url = '/api/products';
   constructor(private http: HttpClient) {}
 
   getAll() {
-    return this.http.get<IProductsReponse>(this.url);
+    return this.http.get<IProductsResponse>(this.url);
   }
 
   create(product: IProduct) {
-    return this.http.post(this.url, product);
+    return this.http.post<IProductCreateResponse>(this.url, product);
   }
 
   getById(id: string) {
@@ -23,14 +28,24 @@ export class ProductService {
   }
 
   update(product: IProduct) {
-    return this.http.put(`${this.url}/${product.id}`, product);
+    return this.http.put<IProductUpdateResponse>(
+      `${this.url}/${product.id}`,
+      product
+    );
   }
 
   deleteById(id: string) {
-    return this.http.delete(`${this.url}/${id}`);
+    return this.http.delete<IProductDeleteResponse>(`${this.url}/${id}`);
   }
 
   verificationById(id: string) {
     return this.http.get<boolean>(`${this.url}/verification/${id}`);
   }
+}
+
+export function provideProductService() {
+  return {
+    provide: PRODUCT_SERVICE_TOKEN,
+    useClass: ProductService,
+  };
 }

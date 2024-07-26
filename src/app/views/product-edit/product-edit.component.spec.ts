@@ -12,7 +12,7 @@ import {
   ActivatedRouteSnapshot,
 } from '@angular/router';
 import { delay, of } from 'rxjs';
-import { ProductService } from '../../services/product.service';
+import { provideProductService } from '../../services/product.service';
 import { IProduct } from '../../interfaces/product.interface';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
@@ -20,14 +20,16 @@ import { routes } from '../../app.routes';
 import { ProductEditFormComponent } from '../../components/product-edit-form/product-edit-form.component';
 import { provideZoneChangeDetection } from '@angular/core';
 import { PRODUCTS_PATH } from '../../constants/routes.contants';
+import { IProductService } from '../../services/product.service.interface';
+import { PRODUCT_SERVICE_TOKEN } from '../../services/product.service.token';
 
 describe('ProductEditComponent', () => {
   let component: ProductEditComponent;
   let fixture: ComponentFixture<ProductEditComponent>;
 
-  let productService: ProductService;
+  let productService: IProductService;
   let routerMock: jasmine.SpyObj<Router> = jasmine.createSpyObj('Router', [
-    'navigate',
+  let productService: IProductService;
   ]);
   let route: jasmine.SpyObj<Pick<ActivatedRoute, 'snapshot'>>;
 
@@ -46,13 +48,13 @@ describe('ProductEditComponent', () => {
         provideHttpClientTesting(),
         provideRouter(routes),
         { provide: ActivatedRoute, useValue: route },
-        { provide: ProductService },
+        provideProductService(),
         { provide: Router, useValue: routerMock },
       ],
     }).compileComponents();
     fixture = TestBed.createComponent(ProductEditComponent);
     component = fixture.componentInstance;
-    productService = TestBed.inject(ProductService);
+    productService = TestBed.inject(PRODUCT_SERVICE_TOKEN);
   });
 
   it('should create', () => {

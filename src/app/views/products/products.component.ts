@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../../services/product.service';
+import { Component, Inject, OnInit } from '@angular/core';
 import { IProduct } from '../../interfaces/product.interface';
 import { ProductTableComponent } from '../../components/product-table/product-table.component';
 import { Router } from '@angular/router';
@@ -8,7 +7,8 @@ import { FormsModule } from '@angular/forms';
 import { ProductConfirmDeleteDialogComponent } from '../../components/product-confirm-delete-dialog/product-confirm-delete-dialog.component';
 import { ButtonComponent } from '../../components/button/button.component';
 import { PARAM_NEW, PRODUCTS_PATH } from '../../constants/routes.contants';
-import { IProductsReponse } from '../../interfaces/products.interface';
+import { IProductService } from '../../services/product.service.interface';
+import { PRODUCT_SERVICE_TOKEN } from '../../services/product.service.token';
 
 @Component({
   selector: 'app-products',
@@ -36,7 +36,10 @@ export class ProductsComponent implements OnInit {
   productToDelete: IProduct | null = null;
   loadingDelete = false;
 
-  constructor(private productService: ProductService, private router: Router) {}
+  constructor(
+    @Inject(PRODUCT_SERVICE_TOKEN) private productService: IProductService,
+    private router: Router
+  ) {}
 
   loadProducts() {
     this.loading = true;
