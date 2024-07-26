@@ -1,1 +1,12 @@
-<p>product-confirm-delete-dialog works!</p>
+<app-dialog [(open)]="open" class="confirm-delete-dialog">
+  <ng-container header>
+    <h2>Atención</h2>
+  </ng-container>
+  <ng-container>
+    <p>¿Estás seguro de que deseas eliminar el producto {{ product.name }}?</p>
+  </ng-container>
+  <ng-container actions>
+    <button (click)="handleReject()" class="reject-button">Cancelar</button>
+    <button class="confirm-button" (click)="handleConfirm()">Confirmar</button>
+  </ng-container>
+</app-dialog>

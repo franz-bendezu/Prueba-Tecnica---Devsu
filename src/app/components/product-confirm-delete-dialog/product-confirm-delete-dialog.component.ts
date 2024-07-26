@@ -1,12 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { IProduct } from '../../interfaces/product.interface';
+import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
   selector: 'app-product-confirm-delete-dialog',
   standalone: true,
-  imports: [],
+  imports: [DialogComponent],
   templateUrl: './product-confirm-delete-dialog.component.html',
-  styleUrl: './product-confirm-delete-dialog.component.css'
+  styleUrl: './product-confirm-delete-dialog.component.css',
 })
 export class ProductConfirmDeleteDialogComponent {
+  @Input()
+  open = false;
+  @Output()
+  reject = new EventEmitter<void>();
 
+  @Input()
+  loading = false;
+  @Input({ required: true })
+  product!: Pick<IProduct, 'name'>;
+  @Output()
+  openChange = new EventEmitter<boolean>();
+  @Output()
+  confirm = new EventEmitter<void>();
+
+  handleReject() {
+    this.reject.emit();
+  }
+
+  handleConfirm() {
+    this.confirm.emit();
+  }
 }
