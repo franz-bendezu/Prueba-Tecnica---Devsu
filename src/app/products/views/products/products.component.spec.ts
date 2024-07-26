@@ -253,4 +253,59 @@ describe('ProductsComponent', () => {
 
     expect(component.loadProducts).toHaveBeenCalled();
   });
+
+
+
+  it('should filter products based on search term', () => {
+    const productA: IProduct = {
+      id: '1',
+      name: 'Product A',
+      description: '',
+      logo: '',
+      date_release: '',
+      date_revision: '',
+    };
+
+    const productB: IProduct = {
+      id: '2',
+      name: 'Product B',
+      description: '',
+      logo: '',
+      date_release: '',
+      date_revision: '',
+    };
+
+    const anotherProduct: IProduct = {
+      id: '3',
+      name: 'Another',
+      description: '',
+      logo: '',
+      date_release: '',
+      date_revision: '',
+    };
+    component.products = [
+      productA,
+      productB,
+      anotherProduct,
+    ];
+
+    component.handleSearchChange('Product');
+    expect(component.search).toBe('Product');
+    expect(component.filteredProducts.length).toBe(2);
+    expect(component.filteredProducts).toEqual([
+      productA,
+      productB,
+    ]);
+
+    component.handleSearchChange('Another');
+    expect(component.search).toBe('Another');
+    expect(component.filteredProducts.length).toBe(1);
+    expect(component.filteredProducts).toEqual([
+      anotherProduct,
+    ]);
+
+    component.handleSearchChange('Nonexistent');
+    expect(component.search).toBe('Nonexistent');
+    expect(component.filteredProducts.length).toBe(0);
+  });
 });
