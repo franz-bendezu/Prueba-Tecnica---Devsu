@@ -22,16 +22,22 @@ describe('DialogComponent', () => {
   });
   
   it('should call showModal when open is true', () => {
+    spyOn(component.dialog.nativeElement, 'showModal');
+    spyOn(component,'show').and.callThrough();
     component.ngOnChanges({
       open: new SimpleChange(null, true, false),
     });
+    expect(component.show).toHaveBeenCalled();
     expect(component.dialog.nativeElement.showModal).toHaveBeenCalled();
   });
 
   it('should call close when open is false', () => {
+    spyOn(component.dialog.nativeElement, 'close');
+    spyOn(component,'close').and.callThrough();
     component.ngOnChanges({
       open: new SimpleChange(null, false, false),
     });
+    expect(component.close).toHaveBeenCalled();
     expect(component.dialog.nativeElement.close).toHaveBeenCalled();
   });
 

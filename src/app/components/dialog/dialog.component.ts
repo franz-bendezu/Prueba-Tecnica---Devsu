@@ -22,22 +22,34 @@ export class DialogComponent implements OnChanges {
   @Output()
   openChange = new EventEmitter<boolean>();
 
-  @ViewChild('dialog', { static: true }) dialog!: ElementRef<HTMLDialogElement>;
+  @ViewChild('dialog', { static: true })
+   dialog!: ElementRef<HTMLDialogElement>;
 
   private lastOpenState: boolean | null = null;
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['open'] && changes['open'].currentValue !== this.lastOpenState) {
+    if (
+      changes['open'] &&
+      changes['open'].currentValue !== this.lastOpenState
+    ) {
       this.toggleDialog(changes['open'].currentValue);
       this.lastOpenState = changes['open'].currentValue;
     }
   }
 
+  show(): void {
+    this.dialog.nativeElement.showModal();
+  }
+
+  close(): void {
+    this.dialog.nativeElement.close();
+  }
+
   private toggleDialog(isOpen: boolean): void {
     if (isOpen) {
-      this.dialog.nativeElement.showModal();
+      this.show();
     } else {
-      this.dialog.nativeElement.close();
+      this.close();
     }
   }
 
