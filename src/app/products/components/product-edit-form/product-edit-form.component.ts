@@ -114,7 +114,7 @@ export class ProductEditFormComponent implements OnChanges, OnInit {
       validators: [
         required(),
         minDate(
-          new Date(),
+          new Date().toISOString().split('T')[0],
           'La fecha de lanzamiento no puede ser anterior a la fecha actual'
         ),
       ],

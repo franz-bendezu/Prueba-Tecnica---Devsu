@@ -61,9 +61,9 @@ export function maxLength(
   };
 }
 
-export function minDate(minDate: Date, message?: string): CustomValidatorFn {
+export function minDate(minDate: string, message?: string): CustomValidatorFn {
   return (control) => {
-    const date = new Date(control.value);
+    const date = control.value;
     if (date < minDate) {
       return {
         minDate: {
