@@ -100,7 +100,7 @@ describe('ProductEditFormComponent', () => {
   it('should call onResetForm method when the form is reset', () => {
     spyOn(component, 'onResetForm');
     const resetButton:ButtonComponent = fixture.debugElement.query(
-     By.css('app-button[type="reset"]')
+     By.css('app-button[type="button"]')
     ).componentInstance 
     
     resetButton.click.emit();
