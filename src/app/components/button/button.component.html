@@ -5,5 +5,6 @@
   (click)="onClick($event)"
   [type]="type"
 >
+  <span *ngIf="loading" class="spinner"></span>
   <ng-content></ng-content>
 </button>
