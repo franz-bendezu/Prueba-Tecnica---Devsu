@@ -26,6 +26,7 @@ export class ProductEditComponent implements OnInit {
   errorSave:Error | null = null;
   loadingSave = false;
   loading = false;
+  error: Error | null = null;
   codeValidator: CodeValidator;
 
   constructor(
@@ -56,8 +57,8 @@ export class ProductEditComponent implements OnInit {
         this.loading = false;
       },
       error: (err) => {
+        this.error = err;
         this.loading = false;
-        this.errorSave = err;
       },
     });
   }

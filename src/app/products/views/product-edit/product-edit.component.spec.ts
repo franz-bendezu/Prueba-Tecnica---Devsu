@@ -11,7 +11,7 @@ import {
   provideRouter,
   ActivatedRouteSnapshot,
 } from '@angular/router';
-import { delay, of } from 'rxjs';
+import { delay, of, throwError } from 'rxjs';
 import { provideProductService } from '../../services/product.service';
 import { IProduct } from '../../interfaces/product.interface';
 import { provideHttpClient } from '@angular/common/http';
@@ -41,9 +41,6 @@ describe('ProductEditComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ProductEditComponent, ProductEditFormComponent],
       providers: [
-        provideZoneChangeDetection({
-          eventCoalescing: true,
-        }),
         provideHttpClient(),
         provideHttpClientTesting(),
         provideRouter(routes),
@@ -192,5 +189,56 @@ describe('ProductEditComponent', () => {
     tick();
     expect(routerMock.navigate).toHaveBeenCalledWith([PRODUCTS_PATH]);
     expect(component.loadingSave).toBe(false);
+  }));
+
+  it('should handle error when loading product', fakeAsync(() => {
+    route.snapshot.params = { id: '1' };
+    const errorMock = new Error('Error loading product');
+    const getByIdSpy = spyOn(productService, 'getById').and.returnValue(
+      throwError(() => errorMock).pipe(delay(0))
+    );
+
+    expect(component.product).toBeNull();
+    expect(component.loading).toBe(false);
+    fixture.detectChanges();
+
+
+    expect(getByIdSpy).toHaveBeenCalledWith('1');
+    expect(getByIdSpy).toHaveBeenCalledTimes(1);
+    expect(component.loading).toBe(false);
+    expect(component.error).toBe(errorMock);
+  }));
+
+  it('should handle error when saving product', fakeAsync(() => {
+    const product: IProduct = {
+      id: '1',
+      name: 'Test Product',
+      description: '',
+      logo: '',
+      date_release: '',
+      date_revision: '',
+    };
+    component.id = '1';
+
+    const errorMock = new Error('Error updating product');
+    const updateSpy = spyOn(productService, 'update').and.returnValue(
+      throwError(() => errorMock)
+    );
+
+    expect(component.loadingSave).toBe(false);
+    
+    component.handleSaveProduct(product);
+
+    expect(updateSpy).toHaveBeenCalledWith(product);
+
+    expect(component.loadingSave).toBe(true);
+
+    fixture.detectChanges();
+
+    // Wait for the promise to resolve
+
+    tick();
+
+    expect(component.errorSave).toBe(errorMock);
   }));
 });
