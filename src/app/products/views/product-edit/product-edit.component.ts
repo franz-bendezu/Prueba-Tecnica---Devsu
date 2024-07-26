@@ -6,7 +6,10 @@ import { PRODUCT_SERVICE_TOKEN } from '../../services/product.service.token';
 import { CommonModule } from '@angular/common';
 import { ProductEditFormComponent } from '../../components/product-edit-form/product-edit-form.component';
 import { catchError, finalize } from 'rxjs';
-import { PARAM_NEW, PRODUCTS_PATH } from '../../../shared/constants/routes.contants';
+import {
+  PARAM_NEW,
+  PRODUCTS_PATH,
+} from '../../../shared/constants/routes.contants';
 import { CodeValidator } from '../../../shared/validators/custom.validators';
 
 @Component({
@@ -20,7 +23,7 @@ export class ProductEditComponent implements OnInit {
   title: string;
   id?: string;
   product: IProduct | null = null;
-  errorSave = '';
+  errorSave:Error | null = null;
   loadingSave = false;
   loading = false;
   codeValidator: CodeValidator;
@@ -31,7 +34,8 @@ export class ProductEditComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.title = 'Formulario de Registro';
-    this.codeValidator = (code: string)=> this.productService.verificationById(code);
+    this.codeValidator = (code: string) =>
+      this.productService.verificationById(code);
   }
 
   ngOnInit(): void {
@@ -45,21 +49,17 @@ export class ProductEditComponent implements OnInit {
 
   getProduct(id: string): void {
     this.loading = true;
-    this.errorSave = '';
-    this.productService
-      .getById(id)
-      .pipe<IProduct>(
-        finalize(() => {
-          this.loading = false;
-        })
-      )
-      .pipe<IProduct>(
-        catchError((err) => {
-          this.errorSave = 'Error al cargar el producto';
-          throw err;
-        })
-      )
-      .subscribe((product) => (this.product = product));
+    this.errorSave = null
+    this.productService.getById(id).subscribe({
+      next: (product) => {
+        this.product = product;
+        this.loading = false;
+      },
+      error: (err) => {
+        this.loading = false;
+        this.errorSave = err;
+      },
+    });
   }
 
   handleSaveProduct(product: IProduct): void {
