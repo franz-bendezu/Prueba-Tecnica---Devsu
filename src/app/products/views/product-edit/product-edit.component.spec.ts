@@ -202,7 +202,6 @@ describe('ProductEditComponent', () => {
     expect(component.loading).toBe(false);
     fixture.detectChanges();
 
-
     expect(getByIdSpy).toHaveBeenCalledWith('1');
     expect(getByIdSpy).toHaveBeenCalledTimes(1);
     expect(component.loading).toBe(false);
@@ -226,7 +225,7 @@ describe('ProductEditComponent', () => {
     );
 
     expect(component.loadingSave).toBe(false);
-    
+
     component.handleSaveProduct(product);
 
     expect(updateSpy).toHaveBeenCalledWith(product);
@@ -241,4 +240,8 @@ describe('ProductEditComponent', () => {
 
     expect(component.errorSave).toBe(errorMock);
   }));
+
+  it('codeValidator should be defined', () => {
+    expect(component.codeValidator).toBeDefined();
+  });
 });
