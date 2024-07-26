@@ -1,0 +1,42 @@
+:host {
+  --primary-color: #f7b731;
+  --primary-hover-color: #f39c12;
+  --secondary-color: #eaecf2;
+  --secondary-hover-color: #d3d6e0;
+  --disabled-color: #fdf1a4;
+}
+
+.button {
+  width: 100%;
+  font-weight: 600;
+  transition: background-color 0.3s;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  outline: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 1.5rem 3rem;
+  font-size: 16px;
+  background-color: var(--primary-color);
+}
+
+.button.primary-button {
+  background-color: var(--primary-color);
+}
+
+.button.primary-button:hover {
+  background-color: var(--primary-hover-color);
+}
+
+.button.primary-button:disabled {
+  background-color: var(--disabled-color);
+  cursor: not-allowed;
+}
+
+.button.secondary-button {
+  background-color: var(--secondary-color);
+}
+
+.button.secondary-button:hover {
+  background-color: var(--secondary-hover-color);
+}
