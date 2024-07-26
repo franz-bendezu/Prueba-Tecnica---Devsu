@@ -9,3 +9,19 @@
     [codeValidator]="codeValidator"
   ></app-product-edit-form>
 </div>
+
+<app-alert
+  [open]="!!error"
+  (openChange)="error = null"
+  title="Error"
+  message="No se pudo cargar el producto"
+></app-alert>
+
+
+<app-alert
+  [open]="!!errorSave"
+  (openChange)="errorSave = null"
+  title="Error"
+  message="No se pudo guardar el producto"  
+></app-alert>
+

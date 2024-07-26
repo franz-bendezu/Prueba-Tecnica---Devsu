@@ -20,6 +20,13 @@
   (confirm)="confirmDelete(productToDelete)"
 ></app-product-confirm-delete-dialog>
 
+<app-alert
+  [open]="!!deleteError"
+  (openChange)="deleteError = null"
+  title="Error"
+  message="No se pudo eliminar el producto"
+/>
+
 <app-product-table
   class="product-table"
   [products]="filteredProducts"

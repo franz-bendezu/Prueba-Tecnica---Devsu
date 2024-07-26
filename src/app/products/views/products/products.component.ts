@@ -12,6 +12,8 @@ import {
 } from '../../../shared/constants/routes.contants';
 import { IProductService } from '../../services/product.service.interface';
 import { PRODUCT_SERVICE_TOKEN } from '../../services/product.service.token';
+import { DialogComponent } from '../../../shared/components/dialog/dialog.component';
+import { AlertComponent } from '../../../shared/components/alert/alert.component';
 
 @Component({
   selector: 'app-products',
@@ -22,6 +24,7 @@ import { PRODUCT_SERVICE_TOKEN } from '../../services/product.service.token';
     FormsModule,
     ProductConfirmDeleteDialogComponent,
     ButtonComponent,
+    AlertComponent
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css',
@@ -31,7 +34,7 @@ export class ProductsComponent implements OnInit {
   filteredProducts: IProduct[] = [];
   loading = true;
   error: Error | null = null;
-  saveError: Error | null = null;
+  deleteError: Error | null = null;
 
   search = '';
 
@@ -80,7 +83,7 @@ export class ProductsComponent implements OnInit {
 
   confirmDelete(product: IProduct) {
     this.loadingDelete = true;
-    this.saveError = null;
+    this.deleteError = null;
     this.productService.deleteById(product.id).subscribe({
       next: () => {
         this.loadProducts();
@@ -88,8 +91,9 @@ export class ProductsComponent implements OnInit {
         this.loadingDelete = false;
       },
       error: (err) => {
-        this.saveError = err;
+        this.deleteError = err;
         this.loadingDelete = false;
+        this.openDialog = false;
       },
     });
   }

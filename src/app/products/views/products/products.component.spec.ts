@@ -191,7 +191,7 @@ describe('ProductsComponent', () => {
 
     component.confirmDelete(productMock);
 
-    expect(component.saveError).toBe(mockError);
+    expect(component.deleteError).toBe(mockError);
   }));
 
   it('should delete a product', () => {

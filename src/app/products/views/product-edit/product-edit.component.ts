@@ -5,17 +5,17 @@ import { IProductService } from '../../services/product.service.interface';
 import { PRODUCT_SERVICE_TOKEN } from '../../services/product.service.token';
 import { CommonModule } from '@angular/common';
 import { ProductEditFormComponent } from '../../components/product-edit-form/product-edit-form.component';
-import { catchError, finalize } from 'rxjs';
 import {
   PARAM_NEW,
   PRODUCTS_PATH,
 } from '../../../shared/constants/routes.contants';
 import { CodeValidator } from '../../../shared/validators/custom.validators';
+import { AlertComponent } from '../../../shared/components/alert/alert.component';
 
 @Component({
   selector: 'app-product-edit',
   standalone: true,
-  imports: [CommonModule, ProductEditFormComponent],
+  imports: [CommonModule, ProductEditFormComponent, AlertComponent],
   templateUrl: './product-edit.component.html',
   styleUrl: './product-edit.component.css',
 })
@@ -71,7 +71,7 @@ export class ProductEditComponent implements OnInit {
 
     productSave$.subscribe({
       error: (err) => {
-        this.loading = false;
+        this.loadingSave = false;
         this.errorSave = err;
       },
       complete: () => {
