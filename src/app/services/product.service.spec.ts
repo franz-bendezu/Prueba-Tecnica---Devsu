@@ -1,22 +1,28 @@
 import { TestBed } from '@angular/core/testing';
-import { ProductService } from './product.service';
 import { provideHttpClient } from '@angular/common/http';
 import {
   HttpTestingController,
   provideHttpClientTesting,
 } from '@angular/common/http/testing';
 import { IProduct } from '../interfaces/product.interface';
-import { IProductsReponse } from '../interfaces/products.interface';
+import { IProductsResponse } from '../interfaces/products.interface';
+import { IProductService } from './product.service.interface';
+import { PRODUCT_SERVICE_TOKEN } from './product.service.token';
+import { provideProductService } from './product.service';
 
 describe('ProductService', () => {
-  let service: ProductService;
+  let service: IProductService;
   let httpTesting: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [provideHttpClient(), provideHttpClientTesting()],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        provideProductService(),
+      ],
     });
-    service = TestBed.inject(ProductService);
+    service = TestBed.inject(PRODUCT_SERVICE_TOKEN);
     httpTesting = TestBed.inject(HttpTestingController);
   });
 
@@ -29,7 +35,7 @@ describe('ProductService', () => {
   });
 
   it('should retrieve all products', () => {
-    const mockProducts: IProductsReponse = {
+    const mockProducts: IProductsResponse = {
       data: [],
     };
 
@@ -122,7 +128,9 @@ describe('ProductService', () => {
       expect(response).toBeTrue();
     });
 
-    const req = httpTesting.expectOne(`/api/products/verification/${productId}`);
+    const req = httpTesting.expectOne(
+      `/api/products/verification/${productId}`
+    );
     expect(req.request.method).toBe('GET');
     req.flush(true);
   });
