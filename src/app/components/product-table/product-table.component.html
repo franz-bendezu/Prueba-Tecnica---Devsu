@@ -11,34 +11,42 @@
       </tr>
     </thead>
     <tbody>
-      <ng-container *ngIf="products.length">
-        <tr *ngFor="let product of items" class="table-row">
-          <td class="table-cell center">
-            <img [src]="product.logo" alt="Logo de {{ product.name }}" />
-          </td>
-          <td class="table-cell left">{{ product.name }}</td>
-          <td class="table-cell left">
-            {{ product.description }}
-          </td>
-          <td class="table-cell left">
-            {{ product.date_release | date : "dd/MM/yyyy" }}
-          </td>
-          <td class="table-cell left">
-            {{ product.date_revision | date : "dd/MM/yyyy" }}
-          </td>
-          <td class="table-cell center">
-            <app-product-table-item-actions
-              (delete)="onDelete(product)"
-              (edit)="onEdit(product)"
-            ></app-product-table-item-actions>
+      <ng-container *ngIf="!loading; else skeletonLoader">
+        <ng-container *ngIf="products.length; else noData">
+          <tr *ngFor="let product of items" class="table-row">
+            <td class="table-cell center">
+              <img [src]="product.logo" alt="Logo de {{ product.name }}" />
+            </td>
+            <td class="table-cell left">{{ product.name }}</td>
+            <td class="table-cell left">{{ product.description }}</td>
+            <td class="table-cell left">{{ product.date_release | date : "dd/MM/yyyy" }}</td>
+            <td class="table-cell left">{{ product.date_revision | date : "dd/MM/yyyy" }}</td>
+            <td class="table-cell center">
+              <app-product-table-item-actions
+                (delete)="onDelete(product)"
+                (edit)="onEdit(product)"
+              ></app-product-table-item-actions>
+            </td>
+          </tr>
+        </ng-container>
+      </ng-container>
+      <ng-template #skeletonLoader>
+        <tr *ngFor="let _ of [1, 2, 3, 4, 5]" class="table-row">
+          <td class="table-cell center"><div class="skeleton skeleton-logo"></div></td>
+          <td class="table-cell left"><div class="skeleton skeleton-text"></div></td>
+          <td class="table-cell left"><div class="skeleton skeleton-text"></div></td>
+          <td class="table-cell left"><div class="skeleton skeleton-text"></div></td>
+          <td class="table-cell left"><div class="skeleton skeleton-text"></div></td>
+          <td class="table-cell center"><div class="skeleton skeleton-actions"></div></td>
+        </tr>
+      </ng-template>
+      <ng-template #noData>
+        <tr class="table-row">
+          <td colspan="6">
+            <ng-content select="[no-data]"> No hay productos </ng-content>
           </td>
         </tr>
-      </ng-container>
-      <tr *ngIf="!products.length" class="table-row">
-        <td colspan="5">
-          <ng-content select="[no-data]"> No hay productos </ng-content>
-        </td>
-      </tr>
+      </ng-template>
     </tbody>
   </table>
 </div>

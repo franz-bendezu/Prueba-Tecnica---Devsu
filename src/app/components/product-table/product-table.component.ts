@@ -32,6 +32,9 @@ export class ProductTableComponent implements OnChanges {
   @Output()
   delete = new EventEmitter<IProduct>();
 
+  @Input()
+  loading = false;
+
   items: IProduct[] = [];
   totalPages = 0;
 

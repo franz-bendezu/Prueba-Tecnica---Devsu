@@ -74,3 +74,27 @@
   border: 1px solid var(--brand-secondary);
 }
 
+.table .skeleton {
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  display: inline-block;
+  height: 20px;
+  width: 100%;
+}
+
+.table .skeleton-logo {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}
+
+.table .skeleton-text {
+  height: 20px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.table .skeleton-actions {
+  height: 20px;
+  width: 60px;
+}
