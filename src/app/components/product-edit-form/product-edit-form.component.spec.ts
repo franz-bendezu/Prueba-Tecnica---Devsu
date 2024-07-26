@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { provideZoneChangeDetection } from '@angular/core';
 import { ButtonComponent } from '../button/button.component';
 import { By } from '@angular/platform-browser';
+import { of } from 'rxjs';
 
 describe('ProductEditFormComponent', () => {
   let component: ProductEditFormComponent;
@@ -26,6 +27,7 @@ describe('ProductEditFormComponent', () => {
 
     fixture = TestBed.createComponent(ProductEditFormComponent);
     component = fixture.componentInstance;
+    component.codeValidator = (_code) => of(false)
   });
 
   it('should create', () => {

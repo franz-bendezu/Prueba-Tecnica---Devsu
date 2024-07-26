@@ -3,13 +3,19 @@
 <form [formGroup]="productForm" class="form" (ngSubmit)="onSubmitForm()">
   <div class="form-group">
     <label for="id">ID</label>
-    <input
-      type="text"
-      class="form-control"
-      id="id"
-      formControlName="id"
-      placeholder="Id"
-    />
+    <div class="form-control-wrapper">
+      <input
+        type="text"
+        class="form-control"
+        id="id"
+        formControlName="id"
+        placeholder="Id"
+      />
+      <div
+        *ngIf="productForm.controls.id.pending"
+        class="form-control-icon spinner"
+      ></div>
+    </div>
     <app-form-error-display
       [control]="productForm.controls.id"
     ></app-form-error-display>

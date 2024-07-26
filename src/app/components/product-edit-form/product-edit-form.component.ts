@@ -4,6 +4,7 @@ import {
   EventEmitter,
   Input,
   OnChanges,
+  OnInit,
   Output,
   SimpleChanges,
 } from '@angular/core';
@@ -17,9 +18,17 @@ import {
   ID_MIN_LENGTH,
   ID_MAX_LENGTH,
 } from '../../constants/validation.constant';
-import { maxLength, minLength, required } from '../../common/custom.validators';
+import {
+  codeExists,
+  CodeValidator,
+  maxLength,
+  minDate,
+  minLength,
+  required,
+} from '../../common/custom.validators';
 import { FormErrorDisplayComponent } from '../form-error-display/form-error-display.component';
 import { ButtonComponent } from '../button/button.component';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-product-edit-form',
@@ -33,7 +42,7 @@ import { ButtonComponent } from '../button/button.component';
   templateUrl: './product-edit-form.component.html',
   styleUrl: './product-edit-form.component.css',
 })
-export class ProductEditFormComponent implements OnChanges {
+export class ProductEditFormComponent implements OnChanges, OnInit {
   @Input()
   title = '';
   @Input()
@@ -43,6 +52,10 @@ export class ProductEditFormComponent implements OnChanges {
   @Input()
   loadingSave = false;
 
+  @Input({
+    required: true,
+  })
+  codeValidator!: CodeValidator;
   @Output() save = new EventEmitter<IProduct>();
 
   productForm = new FormGroup({
@@ -94,13 +107,25 @@ export class ProductEditFormComponent implements OnChanges {
     }),
     date_release: new FormControl('', {
       nonNullable: true,
-      validators: [required()],
+      validators: [
+        required(),
+        minDate(
+          new Date(),
+          'La fecha de lanzamiento no puede ser anterior a la fecha actual'
+        ),
+      ],
     }),
     date_revision: new FormControl('', {
       nonNullable: true,
       validators: [required()],
     }),
   });
+
+  ngOnInit(): void {
+    this.productForm.controls.id.setAsyncValidators([
+      codeExists(this.codeValidator, 'El id ya existe', 'No se pudo verificar'),
+    ]);
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['product']) {
