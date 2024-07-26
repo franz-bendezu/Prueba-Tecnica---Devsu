@@ -1,1 +1,17 @@
-<p>dialog works!</p>
+<dialog
+  class="dialog"
+  #dialog
+  aria-labelledby="dialog_title"
+  (close)="handleClose()"
+  aria-describedby="dialog_description"
+>
+  <div class="dialog-header">
+    <ng-content select="[header]"></ng-content>
+  </div>
+  <div class="dialog-content" id="dialog_description">
+    <ng-content></ng-content>
+  </div>
+  <div class="dialog-actions">
+    <ng-content select="[actions]"></ng-content>
+  </div>
+</dialog>

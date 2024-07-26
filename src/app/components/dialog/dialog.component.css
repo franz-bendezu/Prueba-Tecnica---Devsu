@@ -1,0 +1,33 @@
+:host {
+  .dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+  }
+}
+
+.dialog {
+  border: none !important;
+  border-radius: calc(5px * var(--ratio));
+  box-shadow: 0 0 #0000, 0 0 #0000, 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  max-width: 400px;
+  margin: auto auto;
+}
+
+.dialog-header {
+  padding: 1.5rem 1.5rem 0;
+  font-weight: 900;
+}
+
+.dialog-content {
+  color: var(--grey-color);
+  letter-spacing: var(--leading, 0.025em);
+  line-height: 1.625;
+  padding: 1.5rem 1.5rem 1.5rem;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid #e0e0e0;
+  padding: 1.5rem 1.5rem 1.5rem;
+}
