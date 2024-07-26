@@ -1,0 +1,9 @@
+<ng-container
+  *ngIf="control && control.errors && (control.dirty || control.touched)"
+>
+  <ng-container *ngFor="let errorKey of errorKeys">
+    <div *ngIf="control.errors[errorKey]?.message" class="error-message">
+      {{ control.errors[errorKey].message }}
+    </div>
+  </ng-container>
+</ng-container>
