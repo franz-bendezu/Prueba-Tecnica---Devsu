@@ -83,6 +83,9 @@
     >
       Anterior
     </button>
+    <span class="page-number">{{ currentPage }}</span>
+    <span class="page-number">de</span>
+    <span class="page-number">{{ totalPages }}</span>
     <button
       class="next-button"
       [disabled]="currentPage >= totalPages"
