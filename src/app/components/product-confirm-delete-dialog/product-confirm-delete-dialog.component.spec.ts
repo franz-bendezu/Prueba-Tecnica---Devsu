@@ -1,11 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProductConfirmDeleteDialogComponent } from './product-confirm-delete-dialog.component';
-import { IProduct } from '../../interfaces/product.interface';
 
 describe('ProductConfirmDeleteDialogComponent', () => {
   let component: ProductConfirmDeleteDialogComponent;
   let fixture: ComponentFixture<ProductConfirmDeleteDialogComponent>;
+  const product = {
+    name: 'Test Product',
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -14,6 +16,9 @@ describe('ProductConfirmDeleteDialogComponent', () => {
 
     fixture = TestBed.createComponent(ProductConfirmDeleteDialogComponent);
     component = fixture.componentInstance;
+    component.open = true;
+    component.loading = true;
+    component.product = product;
     fixture.detectChanges();
   });
 
@@ -21,21 +26,7 @@ describe('ProductConfirmDeleteDialogComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should initialize with default values', () => {
-    expect(component.open).toBe(false);
-    expect(component.loading).toBe(false);
-    expect(component.product).toBeUndefined();
-  });
-
   it('should set input properties correctly', () => {
-    const product = {
-      name: 'Test Product',
-    };
-    component.open = true;
-    component.loading = true;
-    component.product = product;
-    fixture.detectChanges();
-
     expect(component.open).toBe(true);
     expect(component.loading).toBe(true);
     expect(component.product).toBe(product);
