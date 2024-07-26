@@ -20,4 +20,14 @@ describe('AlertComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should call handleChangeOpen with false and emit close event when closeAlert is called', () => {
+    spyOn(component, 'handleChangeOpen');
+    spyOn(component.close, 'emit');
+
+    component.closeAlert();
+
+    expect(component.handleChangeOpen).toHaveBeenCalledWith(false);
+    expect(component.close.emit).toHaveBeenCalled();
+  });
 });
