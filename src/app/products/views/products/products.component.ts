@@ -82,6 +82,7 @@ export class ProductsComponent implements OnInit {
       next: () => {
         this.loadProducts();
         this.openDialog = false;
+        this.loadingDelete = false;
       },
       error: (err) => {
         this.saveError = err;
