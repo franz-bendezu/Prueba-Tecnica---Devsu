@@ -1,9 +1,10 @@
 :host {
-  --primary-color: #f7b731;
-  --primary-hover-color: #f39c12;
+  --primary-color: #f5df66;
+  --primary-hover-color: #f5d146;
   --secondary-color: #eaecf2;
   --secondary-hover-color: #d3d6e0;
   --disabled-color: #fdf1a4;
+  --button-text-color: #0f1f54;
 }
 
 .button {
@@ -17,7 +18,7 @@
   border-radius: 4px;
   padding: 1.5rem 3rem;
   font-size: 16px;
-  background-color: var(--primary-color);
+  color: var(--primary-text-color);
 }
 
 .button.primary-button {
