@@ -38,4 +38,17 @@ describe('ProductTableItemActionsComponent', () => {
     component.openMenu();
     expect(component.showMenu).toBe(false);
   });
+
+  it('should close menu when clicking outside', () => {
+    component.showMenu = true;
+    const event = new Event('click');
+    Object.defineProperty(event, 'target', {
+      value: document.createElement('div'),
+    });
+
+    window.dispatchEvent(event);
+    fixture.detectChanges();
+
+    expect(component.showMenu).toBe(false);
+  });
 });
