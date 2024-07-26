@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
@@ -28,7 +29,6 @@ import {
 } from '../../../shared/validators/custom.validators';
 import { FormErrorDisplayComponent } from '../../../shared/components/form-error-display/form-error-display.component';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-product-edit-form',
@@ -41,6 +41,7 @@ import { Observable } from 'rxjs';
   ],
   templateUrl: './product-edit-form.component.html',
   styleUrl: './product-edit-form.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductEditFormComponent implements OnChanges, OnInit {
   @Input()
