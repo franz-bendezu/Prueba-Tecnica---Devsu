@@ -6,7 +6,17 @@
     <p>¿Estás seguro de que deseas eliminar el producto {{ product.name }}?</p>
   </ng-container>
   <ng-container actions>
-    <button (click)="handleReject()" class="reject-button">Cancelar</button>
-    <button class="confirm-button" (click)="handleConfirm()">Confirmar</button>
+    <app-button
+      (click)="handleReject()"
+      class="reject-button"
+      variant="secondary"
+      >Cancelar</app-button
+    >
+    <app-button
+      class="confirm-button"
+      (click)="handleConfirm()"
+      variant="primary"
+      >Confirmar</app-button
+    >
   </ng-container>
 </app-dialog>

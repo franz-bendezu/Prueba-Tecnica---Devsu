@@ -1,32 +1,7 @@
 .confirm-delete-dialog .confirm-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  background-color: #f7b731;
   width: 50%;
-}
-
-.confirm-delete-dialog .confirm-button:hover {
-  background-color: #f39c12;
-}
-
-.confirm-delete-dialog .confirm-button:disabled {
-  background-color: #fdf1a4;
-  cursor: not-allowed;
 }
 
 .confirm-delete-dialog .reject-button {
-  padding: 1.5rem 3rem;
-  font-size: 16px;
-  border: none;
-  border-radius: 4px;
-  background-color: #eaecf2;
-  cursor: pointer;
   width: 50%;
-}
-
-.confirm-delete-dialog .reject-button:hover {
-  background-color: #d3d6e0;
 }
