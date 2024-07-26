@@ -8,7 +8,7 @@ import { IProduct } from '../interfaces/product.interface';
 import { IProductsResponse } from '../interfaces/products.interface';
 import { IProductService } from './product.service.interface';
 import { PRODUCT_SERVICE_TOKEN } from './product.service.token';
-import { provideProductService } from './product.service';
+import { ProductService, provideProductService } from './product.service';
 
 describe('ProductService', () => {
   let service: IProductService;
@@ -43,7 +43,7 @@ describe('ProductService', () => {
       expect(response).toEqual(mockProducts);
     });
 
-    const req = httpTesting.expectOne('/api/products');
+    const req = httpTesting.expectOne(ProductService.PRODUCT_URL);
     expect(req.request.method).toBe('GET');
     req.flush(mockProducts);
   });
@@ -62,7 +62,7 @@ describe('ProductService', () => {
       expect(response).toBeTruthy();
     });
 
-    const req = httpTesting.expectOne('/api/products');
+    const req = httpTesting.expectOne(ProductService.PRODUCT_URL);
     expect(req.request.method).toBe('POST');
     expect(req.request.body).toEqual(mockProduct);
     req.flush({});
@@ -83,7 +83,9 @@ describe('ProductService', () => {
       expect(response).toEqual(mockProduct);
     });
 
-    const req = httpTesting.expectOne(`/api/products/${productId}`);
+    const req = httpTesting.expectOne(
+      `${ProductService.PRODUCT_URL}/${productId}`
+    );
     expect(req.request.method).toBe('GET');
     req.flush(mockProduct);
   });
@@ -102,7 +104,7 @@ describe('ProductService', () => {
       expect(response).toBeTruthy();
     });
 
-    const req = httpTesting.expectOne(`/api/products/${mockProduct.id}`);
+    const req = httpTesting.expectOne(`${ProductService.PRODUCT_URL}/${mockProduct.id}`);
     expect(req.request.method).toBe('PUT');
     expect(req.request.body).toEqual(mockProduct);
     req.flush({});
@@ -115,7 +117,7 @@ describe('ProductService', () => {
       expect(response).toBeTruthy();
     });
 
-    const req = httpTesting.expectOne(`/api/products/${productId}`);
+    const req = httpTesting.expectOne(`${ProductService.PRODUCT_URL}/${productId}`);
     expect(req.request.method).toBe('DELETE');
     expect(req.request.body).toBeNull();
     req.flush({});
@@ -129,7 +131,7 @@ describe('ProductService', () => {
     });
 
     const req = httpTesting.expectOne(
-      `/api/products/verification/${productId}`
+      `${ProductService.PRODUCT_URL}/verification/${productId}`
     );
     expect(req.request.method).toBe('GET');
     req.flush(true);

@@ -13,36 +13,43 @@ import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class ProductService implements IProductService {
-  static PATH = '/products';
-  url = environment.apiUrl + ProductService.PATH;
+  static PRODUCTS_PATH = '/products';
+  static PRODUCT_URL = environment.apiUrl + ProductService.PRODUCTS_PATH;
 
   constructor(private http: HttpClient) {}
 
   getAll() {
-    return this.http.get<IProductsResponse>(this.url);
+    return this.http.get<IProductsResponse>(ProductService.PRODUCT_URL);
   }
 
   create(product: IProduct) {
-    return this.http.post<IProductCreateResponse>(this.url, product);
+    return this.http.post<IProductCreateResponse>(
+      ProductService.PRODUCT_URL,
+      product
+    );
   }
 
   getById(id: string) {
-    return this.http.get<IProduct>(`${this.url}/${id}`);
+    return this.http.get<IProduct>(`${ProductService.PRODUCT_URL}/${id}`);
   }
 
   update(product: IProduct) {
     return this.http.put<IProductUpdateResponse>(
-      `${this.url}/${product.id}`,
+      `${ProductService.PRODUCT_URL}/${product.id}`,
       product
     );
   }
 
   deleteById(id: string) {
-    return this.http.delete<IProductDeleteResponse>(`${this.url}/${id}`);
+    return this.http.delete<IProductDeleteResponse>(
+      `${ProductService.PRODUCT_URL}/${id}`
+    );
   }
 
   verificationById(id: string) {
-    return this.http.get<boolean>(`${this.url}/verification/${id}`);
+    return this.http.get<boolean>(
+      `${ProductService.PRODUCT_URL}/verification/${id}`
+    );
   }
 }
 
