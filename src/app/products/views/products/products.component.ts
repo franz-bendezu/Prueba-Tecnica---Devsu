@@ -5,8 +5,8 @@ import { ProductTableComponent } from '../../components/product-table/product-ta
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ProductConfirmDeleteDialogComponent } from '../../components/product-confirm-delete-dialog/product-confirm-delete-dialog.component';
-import { ButtonComponent } from '../../components/button/button.component';
-import { PARAM_NEW, PRODUCTS_PATH } from '../../constants/routes.contants';
+import { ButtonComponent } from '../../../shared/components/button/button.component';
+import { PARAM_NEW, PRODUCTS_PATH } from '../../../shared/constants/routes.contants';
 import { IProductService } from '../../services/product.service.interface';
 import { PRODUCT_SERVICE_TOKEN } from '../../services/product.service.token';
 

@@ -25,9 +25,9 @@ import {
   minDate,
   minLength,
   required,
-} from '../../common/custom.validators';
-import { FormErrorDisplayComponent } from '../form-error-display/form-error-display.component';
-import { ButtonComponent } from '../button/button.component';
+} from '../../../shared/validators/custom.validators';
+import { FormErrorDisplayComponent } from '../../../shared/components/form-error-display/form-error-display.component';
+import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { Observable } from 'rxjs';
 
 @Component({

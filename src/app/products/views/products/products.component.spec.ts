@@ -8,7 +8,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { By } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { PARAM_NEW, PRODUCTS_PATH } from '../../constants/routes.contants';
+import { PARAM_NEW, PRODUCTS_PATH } from '../../../shared/constants/routes.contants';
 import { IProductService } from '../../services/product.service.interface';
 import { PRODUCT_SERVICE_TOKEN } from '../../services/product.service.token';
 

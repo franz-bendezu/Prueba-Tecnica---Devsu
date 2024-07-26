@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IProduct } from '../../interfaces/product.interface';
-import { DialogComponent } from '../dialog/dialog.component';
-import { ButtonComponent } from '../button/button.component';
+import { DialogComponent } from '../../../shared/components/dialog/dialog.component';
+import { ButtonComponent } from '../../../shared/components/button/button.component';
 
 @Component({
   selector: 'app-product-confirm-delete-dialog',

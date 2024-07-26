@@ -6,8 +6,8 @@ import { PRODUCT_SERVICE_TOKEN } from '../../services/product.service.token';
 import { CommonModule } from '@angular/common';
 import { ProductEditFormComponent } from '../../components/product-edit-form/product-edit-form.component';
 import { catchError, finalize } from 'rxjs';
-import { PARAM_NEW, PRODUCTS_PATH } from '../../constants/routes.contants';
-import { CodeValidator } from '../../common/custom.validators';
+import { PARAM_NEW, PRODUCTS_PATH } from '../../../shared/constants/routes.contants';
+import { CodeValidator } from '../../../shared/validators/custom.validators';
 
 @Component({
   selector: 'app-product-edit',

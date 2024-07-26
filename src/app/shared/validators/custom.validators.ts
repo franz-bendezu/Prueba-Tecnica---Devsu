@@ -3,7 +3,7 @@ import {
   CustomAsyncValidatorFn,
   CustomValidationErrors,
   CustomValidatorFn,
-} from './custom-validator.interface';
+} from '../interfaces/custom-validator.interface';
 import { Observable, map, catchError, of } from 'rxjs';
 
 export function required(message?: string): CustomValidatorFn {

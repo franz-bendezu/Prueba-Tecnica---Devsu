@@ -6,9 +6,9 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
-import { DotsIcon } from '../icons/dots.icon';
-import { PencilIcon } from '../icons/pencil.icon';
-import { TrashIcon } from '../icons/trash.icon';
+import { DotsIcon } from '../../../shared/components/icons/dots.icon';
+import { PencilIcon } from '../../../shared/components/icons/pencil.icon';
+import { TrashIcon } from '../../../shared/components/icons/trash.icon';
 
 @Component({
   selector: 'app-product-table-item-actions',

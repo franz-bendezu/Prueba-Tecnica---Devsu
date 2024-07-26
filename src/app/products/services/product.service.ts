@@ -9,7 +9,7 @@ import {
 } from '../interfaces/products.interface';
 import { IProductService } from './product.service.interface';
 import { PRODUCT_SERVICE_TOKEN } from './product.service.token';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class ProductService implements IProductService {

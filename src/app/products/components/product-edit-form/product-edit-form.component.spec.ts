@@ -1,11 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProductEditFormComponent } from './product-edit-form.component';
-import { FormErrorDisplayComponent } from '../form-error-display/form-error-display.component';
+import { FormErrorDisplayComponent } from '../../../shared/components/form-error-display/form-error-display.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { provideZoneChangeDetection } from '@angular/core';
-import { ButtonComponent } from '../button/button.component';
+import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { By } from '@angular/platform-browser';
 import { of } from 'rxjs';
 
