@@ -15,7 +15,6 @@ describe('FormErrorDisplayComponent', () => {
 
     fixture = TestBed.createComponent(FormErrorDisplayComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
@@ -32,12 +31,14 @@ describe('FormErrorDisplayComponent', () => {
   it('when no errors, get errorKeys should return an empty array', () => {
     component.control = new FormControl('');
     setError(component.control, null);
+    fixture.detectChanges();
     expect(component.errorKeys).toEqual([]);
   });
 
   it('should display error message when control is dirty or touched and has errors', () => {
     component.control = new FormControl('');
     setError(component.control, { required: { message: 'Field is required' } });
+    fixture.detectChanges();
     const errorMessage = fixture.debugElement.query(
       By.css('.error-message')
     ).nativeElement;
@@ -69,6 +70,7 @@ describe('FormErrorDisplayComponent', () => {
       required: { message: 'Field is required' },
       pattern: { message: 'Invalid format' },
     });
+    fixture.detectChanges();
     const errorMessages = fixture.debugElement.queryAll(
       By.css('.error-message')
     );
