@@ -39,4 +39,8 @@ export class ProductConfirmDeleteDialogComponent {
   handleConfirm() {
     this.confirm.emit();
   }
+
+  handleOpenChange(open: boolean) {
+    this.openChange.emit(open);
+  }
 }

@@ -1,4 +1,8 @@
-<app-dialog [(open)]="open" class="confirm-delete-dialog">
+<app-dialog
+  [open]="open"
+  (openChange)="handleOpenChange($event)"
+  class="confirm-delete-dialog"
+>
   <ng-container header>
     <h2>Atención</h2>
   </ng-container>
