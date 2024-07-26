@@ -10,6 +10,9 @@
       formControlName="id"
       placeholder="Id"
     />
+    <app-form-error-display
+      [control]="productForm.controls.id"
+    ></app-form-error-display>
   </div>
   <div class="form-group">
     <label for="name">Nombre</label>
@@ -20,6 +23,9 @@
       formControlName="name"
       placeholder="Name"
     />
+    <app-form-error-display
+      [control]="productForm.controls.name"
+    ></app-form-error-display>
   </div>
   <div class="form-group">
     <label for="description">Descripción</label>
@@ -30,6 +36,9 @@
       formControlName="description"
       placeholder="Ingrese la descripción"
     />
+    <app-form-error-display
+      [control]="productForm.controls.description"
+    ></app-form-error-display>
   </div>
   <div class="form-group">
     <label for="logo">Logo</label>
@@ -40,6 +49,9 @@
       formControlName="logo"
       placeholder="Logo"
     />
+    <app-form-error-display
+      [control]="productForm.controls.logo"
+    ></app-form-error-display>
   </div>
   <div class="form-group">
     <label for="date_release">Fecha de Lanzamiento</label>
@@ -50,6 +62,9 @@
       formControlName="date_release"
       placeholder="Date Release"
     />
+    <app-form-error-display
+      [control]="productForm.controls.date_release"
+    ></app-form-error-display>
   </div>
   <div class="form-group">
     <label for="date_revision">Date Revision</label>
@@ -60,6 +75,9 @@
       formControlName="date_revision"
       placeholder="Date Revision"
     />
+    <app-form-error-display
+      [control]="productForm.controls.date_revision"
+    ></app-form-error-display>
   </div>
 
   <div class="form-actions">

@@ -53,3 +53,19 @@
   justify-content: space-around;
   margin: 2rem 0;
 }
+
+.form-control.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+.form-control.ng-invalid.ng-touched::placeholder {
+  color: red;
+}
+
+.form-control.ng-invalid.ng-touched .form-control {
+  border: 1px solid red;
+}
+
+.form-control.ng-invalid.ng-touched.form-control:focus {
+  border: 1px solid red;
+}

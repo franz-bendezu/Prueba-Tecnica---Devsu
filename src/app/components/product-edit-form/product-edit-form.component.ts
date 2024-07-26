@@ -18,6 +18,7 @@ import {
   ID_MAX_LENGTH,
 } from '../../constants/validation.constant';
 import { maxLength, minLength, required } from '../../common/custom.validators';
+import { FormErrorDisplayComponent } from '../form-error-display/form-error-display.component';
 import { ButtonComponent } from '../button/button.component';
 
 @Component({
@@ -26,6 +27,7 @@ import { ButtonComponent } from '../button/button.component';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    FormErrorDisplayComponent,
     ButtonComponent,
   ],
   templateUrl: './product-edit-form.component.html',
