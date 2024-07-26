@@ -98,17 +98,21 @@ describe('ProductTableComponent', () => {
     component.totalPages = 2;
     fixture.detectChanges();
 
-    const buttons = fixture.debugElement.queryAll(
-      By.css('.table-navigation button')
+    const prevButton = fixture.debugElement.query(
+      By.css('.table-navigation .prev-button')
     );
-    expect(buttons[0].nativeElement.disabled).toBeTrue();
-    expect(buttons[1].nativeElement.disabled).toBeFalse();
+    const nextButton = fixture.debugElement.query(
+      By.css('.table-navigation .next-button')
+    );
+    expect(prevButton.nativeElement.disabled).toBeTrue();
+    expect(nextButton.nativeElement.disabled).toBeFalse();
 
-    component.currentPage = 2;
+    nextButton.nativeElement.click();
     fixture.detectChanges();
+    expect(component.currentPage).toBe(2);
 
-    expect(buttons[0].nativeElement.disabled).toBeFalse();
-    expect(buttons[1].nativeElement.disabled).toBeTrue();
+    expect(prevButton.nativeElement.disabled).toBeFalse();
+    expect(nextButton.nativeElement.disabled).toBeTrue();
   });
 
   it('should call changePage with correct argument when Previous button is clicked', () => {

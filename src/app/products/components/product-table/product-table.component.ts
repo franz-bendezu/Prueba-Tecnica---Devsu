@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
@@ -17,6 +18,7 @@ import { ProductTableItemActionsComponent } from '../product-table-item-actions/
   imports: [CommonModule, FormsModule, ProductTableItemActionsComponent],
   templateUrl: './product-table.component.html',
   styleUrl: './product-table.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductTableComponent implements OnChanges {
   @Input()
