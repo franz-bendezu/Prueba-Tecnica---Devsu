@@ -1,6 +1,22 @@
-# PruebaTecnicaDevsu
+# Prueba Tecnica Devsu
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.1.
+
+## Steps for Local Running
+
+To run the project in local mode with a proxy local backend server, execute the following command in the terminal:
+
+```bash
+npm run start:local
+```
+
+## Steps for Execute Tests
+
+To run the tests and generate a coverage report, execute the following command in the terminal:
+
+```bash
+npm run test:coverage:ci
+```
 
 ## Development server
 
