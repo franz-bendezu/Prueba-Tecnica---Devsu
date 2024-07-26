@@ -5,11 +5,16 @@ import { IProduct } from '../../interfaces/product.interface';
 import { ProductTableComponent } from '../../components/product-table/product-table.component';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-
+import { ProductConfirmDeleteDialogComponent } from '../../components/product-confirm-delete-dialog/product-confirm-delete-dialog.component';
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CommonModule, ProductTableComponent, FormsModule],
+  imports: [
+    CommonModule,
+    ProductTableComponent,
+    FormsModule,
+    ProductConfirmDeleteDialogComponent,
+  ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css',
 })
@@ -19,6 +24,10 @@ export class ProductsComponent implements OnInit {
   error: Error | null = null;
 
   search = '';
+
+  openDialog = false;
+
+  productToDelete: IProduct | null = null;
 
   constructor(private productService: ProductService, private router: Router) {}
 
@@ -51,6 +60,23 @@ export class ProductsComponent implements OnInit {
   }
 
   deleteProduct(product: IProduct) {
-   alert('Are you sure you want to delete this product?');
+    this.openDialog = true;
+    this.productToDelete = product;
+  }
+
+  confirmDelete(product: IProduct) {
+    this.openDialog = false;
+    this.productService.deleteById(product.id).subscribe({
+      complete: () => {
+        this.loadProducts();
+      },
+      error: (err) => {
+        this.error = err;
+      },
+    });
+  }
+
+  cancelDelete() {
+    this.openDialog = false;
   }
 }
