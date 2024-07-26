@@ -29,7 +29,7 @@ describe('ProductEditComponent', () => {
 
   let productService: IProductService;
   let routerMock: jasmine.SpyObj<Router> = jasmine.createSpyObj('Router', [
-  let productService: IProductService;
+    'navigate',
   ]);
   let route: jasmine.SpyObj<Pick<ActivatedRoute, 'snapshot'>>;
 
@@ -55,6 +55,7 @@ describe('ProductEditComponent', () => {
     fixture = TestBed.createComponent(ProductEditComponent);
     component = fixture.componentInstance;
     productService = TestBed.inject(PRODUCT_SERVICE_TOKEN);
+    spyOn(productService, 'verificationById').and.returnValue(of(true));
   });
 
   it('should create', () => {
@@ -76,9 +77,8 @@ describe('ProductEditComponent', () => {
     );
     expect(component.product).toBeNull();
     expect(component.loading).toBe(false);
-  
 
-    // Trigger ngOnInit 
+    // Trigger ngOnInit
     fixture.detectChanges();
 
     expect(component.id).toBe('1');
@@ -96,7 +96,7 @@ describe('ProductEditComponent', () => {
   }));
 
   it('should not load product when id is not provided', fakeAsync(() => {
-    route.snapshot.params = {  };
+    route.snapshot.params = {};
     const product: IProduct = {
       id: '1',
       name: 'Test Product',
@@ -129,7 +129,10 @@ describe('ProductEditComponent', () => {
     component.id = '1';
 
     const updateSpy = spyOn(productService, 'update').and.returnValue(
-      of(product).pipe(delay(0))
+      of({
+        data: product,
+        message: 'Product updated',
+      }).pipe(delay(0))
     );
 
     routerMock.navigate.and.returnValue(
@@ -164,7 +167,10 @@ describe('ProductEditComponent', () => {
     };
 
     const createSpy = spyOn(productService, 'create').and.returnValue(
-      of(product).pipe(delay(0))
+      of({
+        data: product,
+        message: 'Product created',
+      }).pipe(delay(0))
     );
 
     routerMock.navigate.and.returnValue(
