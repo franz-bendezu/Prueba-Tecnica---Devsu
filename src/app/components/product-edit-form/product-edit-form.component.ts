@@ -125,6 +125,16 @@ export class ProductEditFormComponent implements OnChanges, OnInit {
     this.productForm.controls.id.setAsyncValidators([
       codeExists(this.codeValidator, 'El id ya existe', 'No se pudo verificar'),
     ]);
+    this.productForm.controls.date_revision.disable();
+    this.productForm.controls.date_release.valueChanges.subscribe((value) => {
+      if (value) {
+        const dateRelease = new Date(value);
+        dateRelease.setFullYear(dateRelease.getFullYear() + 1);
+        this.productForm.controls.date_revision.setValue(
+          dateRelease.toISOString().split('T')[0]
+        );
+      }
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
