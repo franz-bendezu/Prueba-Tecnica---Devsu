@@ -1,4 +1,9 @@
 <div class="container">
   <app-product-edit-form
+    [title]="title"
+    [loading]="loading"
+    [loadingSave]="loadingSave"
+    [product]="product"
+    (save)="handleSaveProduct($event)"
   ></app-product-edit-form>
 </div>
