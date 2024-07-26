@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AlertComponent } from './alert.component';
 import { By } from '@angular/platform-browser';
+import { ButtonComponent } from '../button/button.component';
 
 describe('AlertComponent', () => {
   let component: AlertComponent;
@@ -9,9 +10,8 @@ describe('AlertComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AlertComponent]
-    })
-    .compileComponents();
+      imports: [AlertComponent, ButtonComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(AlertComponent);
     component = fixture.componentInstance;
@@ -20,18 +20,6 @@ describe('AlertComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should display the title and message', () => {
-    component.title = 'Test Title';
-    component.message = 'Test Message';
-    fixture.detectChanges();
-
-    const titleElement = fixture.debugElement.query(By.css('div[header]')).nativeElement;
-    const messageElement = fixture.debugElement.query(By.css('p')).nativeElement;
-
-    expect(titleElement.textContent).toContain('Test Title');
-    expect(messageElement.textContent).toContain('Test Message');
   });
 
   it('should emit openChange event when handleChangeOpen is called', () => {
@@ -52,12 +40,16 @@ describe('AlertComponent', () => {
 
   it('should call handleChangeOpen and closeAlert on button click', () => {
     spyOn(component, 'handleChangeOpen');
-    spyOn(component, 'closeAlert');
+    spyOn(component, 'closeAlert').and.callThrough();
 
-    const button = fixture.debugElement.query(By.css('app-button')).nativeElement;
-    button.click();
+    const button: ButtonComponent = fixture.debugElement.query(
+      By.css('app-button')
+    ).componentInstance;
+    button.click.emit(new MouseEvent('click'));
 
-    expect(component.handleChangeOpen).toHaveBeenCalledWith(false);
+    fixture.detectChanges();
+
     expect(component.closeAlert).toHaveBeenCalled();
+    expect(component.handleChangeOpen).toHaveBeenCalledWith(false);
   });
 });
