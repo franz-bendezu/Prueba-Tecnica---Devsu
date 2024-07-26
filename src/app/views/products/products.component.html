@@ -1,5 +1,5 @@
 <h1>Productos</h1>
-<!-- bar -->
+
 <div class="product-bar">
   <input
     class="search"
@@ -9,10 +9,7 @@
   />
   <button class="add-button" (click)="addProduct()">Agregar</button>
 </div>
-<p *ngIf="error; else table">
-  Error al cargar los productos
-  <button (click)="loadProducts()">Reintentar</button>
-</p>
+
 <app-product-confirm-delete-dialog
   *ngIf="productToDelete"
   [product]="productToDelete"
@@ -20,13 +17,18 @@
   (reject)="cancelDelete()"
   (confirm)="confirmDelete(productToDelete)"
 ></app-product-confirm-delete-dialog>
-<ng-template #table>
-  <app-product-table
-    class="product-table"
-    [products]="products"
-    (delete)="deleteProduct($event)"
-    (edit)="editProduct($event)"
-  >
-    <p *ngIf="loading" no-data>Cargando productos...</p>
-  </app-product-table>
-</ng-template>
+
+<app-product-table
+  class="product-table"
+  [products]="products"
+  (delete)="deleteProduct($event)"
+  (edit)="editProduct($event)"
+>
+  <p *ngIf="error; else loading" no-data>
+    Error al cargar los productos
+    <button (click)="loadProducts()">Reintentar</button>
+  </p>
+  <ng-template #loading no-data>
+    <p>Cargando productos...</p>
+  </ng-template>
+</app-product-table>
