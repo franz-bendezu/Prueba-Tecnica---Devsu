@@ -4,7 +4,8 @@
   <input
     class="search"
     type="text"
-    [(ngModel)]="search"
+    [ngModel]="search"
+    (ngModelChange)="handleSearchChange($event)"
     placeholder="Nombre del producto"
   />
   <app-button class="add-button" (click)="addProduct()">Agregar</app-button>
@@ -21,7 +22,7 @@
 
 <app-product-table
   class="product-table"
-  [products]="products"
+  [products]="filteredProducts"
   (delete)="deleteProduct($event)"
   (edit)="editProduct($event)"
   [loading]="loading"
@@ -30,5 +31,10 @@
     Error al cargar los productos
     <button (click)="loadProducts()">Reintentar</button>
   </p>
-  <p *ngIf="!loading" no-data>No hay productos</p>
+  <div *ngIf="!loading" no-data>
+    <div *ngIf="!products.length">No hay productos</div>
+    <div *ngIf="products.length && !filteredProducts.length">
+      No hay productos que coincidan con la búsqueda
+    </div>
+  </div>
 </app-product-table>

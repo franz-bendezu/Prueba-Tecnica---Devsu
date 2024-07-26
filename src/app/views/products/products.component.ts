@@ -25,6 +25,7 @@ import { PRODUCT_SERVICE_TOKEN } from '../../services/product.service.token';
 })
 export class ProductsComponent implements OnInit {
   products: IProduct[] = [];
+  filteredProducts: IProduct[] = [];
   loading = true;
   error: Error | null = null;
   saveError: Error | null = null;
@@ -45,8 +46,9 @@ export class ProductsComponent implements OnInit {
     this.loading = true;
     this.error = null;
     this.productService.getAll().subscribe({
-      next: (response: IProductsReponse) => {
+      next: (response) => {
         this.products = response.data;
+        this.filteredProducts = this.products;
         this.loading = false;
       },
       error: (err) => {
@@ -86,6 +88,13 @@ export class ProductsComponent implements OnInit {
         this.loadingDelete = false;
       },
     });
+  }
+
+  handleSearchChange(search: string) {
+    this.search = search;
+    this.filteredProducts = this.products.filter((product) =>
+      product.name.toLowerCase().includes(search.toLowerCase())
+    );
   }
 
   cancelDelete() {
