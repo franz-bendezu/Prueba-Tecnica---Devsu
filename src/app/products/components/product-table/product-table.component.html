@@ -15,12 +15,21 @@
         <ng-container *ngIf="products.length; else noData">
           <tr *ngFor="let product of items" class="table-row">
             <td class="table-cell center">
-              <img [src]="product.logo" alt="Logo de {{ product.name }}" />
+              <img
+                [src]="product.logo"
+                alt="Logo de {{ product.name }}"
+                height="40"
+                width="40"
+              />
             </td>
             <td class="table-cell left">{{ product.name }}</td>
             <td class="table-cell left">{{ product.description }}</td>
-            <td class="table-cell left">{{ product.date_release | date : "dd/MM/yyyy" }}</td>
-            <td class="table-cell left">{{ product.date_revision | date : "dd/MM/yyyy" }}</td>
+            <td class="table-cell left">
+              {{ product.date_release | date : "dd/MM/yyyy" }}
+            </td>
+            <td class="table-cell left">
+              {{ product.date_revision | date : "dd/MM/yyyy" }}
+            </td>
             <td class="table-cell center">
               <app-product-table-item-actions
                 (delete)="onDelete(product)"
@@ -32,12 +41,24 @@
       </ng-container>
       <ng-template #skeletonLoader>
         <tr *ngFor="let _ of [1, 2, 3, 4, 5]" class="table-row">
-          <td class="table-cell center"><div class="skeleton skeleton-logo"></div></td>
-          <td class="table-cell left"><div class="skeleton skeleton-text"></div></td>
-          <td class="table-cell left"><div class="skeleton skeleton-text"></div></td>
-          <td class="table-cell left"><div class="skeleton skeleton-text"></div></td>
-          <td class="table-cell left"><div class="skeleton skeleton-text"></div></td>
-          <td class="table-cell center"><div class="skeleton skeleton-actions"></div></td>
+          <td class="table-cell center">
+            <div class="skeleton skeleton-logo"></div>
+          </td>
+          <td class="table-cell left">
+            <div class="skeleton skeleton-text"></div>
+          </td>
+          <td class="table-cell left">
+            <div class="skeleton skeleton-text"></div>
+          </td>
+          <td class="table-cell left">
+            <div class="skeleton skeleton-text"></div>
+          </td>
+          <td class="table-cell left">
+            <div class="skeleton skeleton-text"></div>
+          </td>
+          <td class="table-cell center">
+            <div class="skeleton skeleton-actions"></div>
+          </td>
         </tr>
       </ng-template>
       <ng-template #noData>
