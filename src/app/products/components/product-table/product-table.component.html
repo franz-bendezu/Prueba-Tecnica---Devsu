@@ -85,7 +85,7 @@
     </button>
     <button
       class="next-button"
-      [disabled]="currentPage === totalPages"
+      [disabled]="currentPage >= totalPages"
       (click)="changePage(currentPage + 1)"
     >
       Siguiente
