@@ -1,0 +1,10 @@
+<app-dialog [open]="open" (openChange)="handleChangeOpen($event)">
+  <div header>
+    {{ title }}
+  </div>
+  <p>
+    {{ message }}
+  </p>
+
+  <app-button (click)="closeAlert()" actions>Cerrar</app-button>
+</app-dialog>
