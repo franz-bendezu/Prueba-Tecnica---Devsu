@@ -1,10 +1,4 @@
-import {
-  ComponentFixture,
-  fakeAsync,
-  flush,
-  TestBed,
-  tick,
-} from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 import { provideProductService } from '../../services/product.service';
 import { IProduct } from '../../interfaces/product.interface';
@@ -168,7 +162,11 @@ describe('ProductsComponent', () => {
       date_release: '',
       date_revision: '',
     };
-    spyOn(productService, 'deleteById').and.returnValue(of({}));
+    spyOn(productService, 'deleteById').and.returnValue(
+      of({
+        message: 'Product deleted',
+      })
+    );
 
     component.confirmDelete(productMock);
 
@@ -194,7 +192,6 @@ describe('ProductsComponent', () => {
     component.confirmDelete(productMock);
 
     expect(component.saveError).toBe(mockError);
-
   }));
 
   it('should delete a product', () => {
